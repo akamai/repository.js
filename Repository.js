@@ -13,36 +13,36 @@ var SOASTA = {
 			tokens.connect(tenant_name, user_name, password, callback);
 		};
 
-		this.create_object = function(props, callback) {
-			objects.create_object(tokens.token, props, callback);
+		this.createObject = function(props, callback) {
+			objects.createObject(tokens.token, props, callback);
 		};
 
-		this.get_object_by_id = function(type, id, callback) {
-			objects.get_object_by_id(tokens.token, type, id, callback);
+		this.getObjectByID = function(type, id, callback) {
+			objects.getObjectByID(tokens.token, type, id, callback);
 		};
 
-		this.query_objects = function(type, query, callback) {
-			objects.query_objects(tokens.token, type, query, callback);
+		this.queryObjects = function(type, query, callback) {
+			objects.queryObjects(tokens.token, type, query, callback);
 		};
 
-		this.update_object = function(type, id, props, callback) {
-			objects.update_object(tokens.token, type, id, props, callback);
+		this.updateObject = function(type, id, props, callback) {
+			objects.updateObject(tokens.token, type, id, props, callback);
 		};
 
-		this.delete_object = function(type, id, callback) {
-			objects.delete_object(tokens.token, type, id, callback);
+		this.deleteObject = function(type, id, callback) {
+			objects.deleteObject(tokens.token, type, id, callback);
 		};
 
-		this.read_seed_data = function(id, callback) {
-			seed_data.read_seed_data(tokens.token, id, callback);
+		this.readSeedData = function(id, callback) {
+			seed_data.readSeedData(tokens.token, id, callback);
 		};
 
-		this.append_seed_data = function(id, content, callback) {
-			seed_data.append_seed_data(tokens.token, id, content, callback);
+		this.appendSeedData = function(id, content, callback) {
+			seed_data.appendSeedData(tokens.token, id, content, callback);
 		};
 
-		this.truncate_seed_data = function(id, callback) {
-			seed_data.truncate_seed_data(tokens.token, id, callback);
+		this.truncateSeedData = function(id, callback) {
+			seed_data.truncateSeedData(tokens.token, id, callback);
 		};
 
 		this.disconnect = function(callback) {
@@ -58,43 +58,43 @@ repo.connect("myTenant", "myUser", "myPassword", function() {
 	console.log("Got connect callback!");
 });
 
-repo.create_object({
+repo.createObject({
 	name: "some name!",
 	type: "some type!"
 }, function() {
-	console.log("Got create_object callback!");
+	console.log("Got createObject callback!");
 });
 
-repo.get_object_by_id("composition", 42, function() {
-	console.log("Got get_object_by_id callback!");
+repo.getObjectByID("composition", 42, function() {
+	console.log("Got getObjectByID callback!");
 });
 
-repo.query_objects("composition", {
+repo.queryObjects("composition", {
 	"last_played": "whenever!"
 }, function() {
-	console.log("Got query_objects callback!");
+	console.log("Got queryObjects callback!");
 });
 
-repo.update_object("messageclip", 21, {
+repo.updateObject("messageclip", 21, {
 	"something!": "whatever!"
 }, function() {
-	console.log("Got update_object callback!");
+	console.log("Got updateObject callback!");
 });
 
-repo.delete_object("target", 84, function() {
-	console.log("Got delete_object callback!");
+repo.deleteObject("target", 84, function() {
+	console.log("Got deleteObject callback!");
 });
 
-repo.read_seed_data(121, function() {
-	console.log("Got read_seed_data callback!");
+repo.readSeedData(121, function() {
+	console.log("Got readSeedData callback!");
 });
 
-repo.append_seed_data(363, "new CSV!", function() {
-	console.log("Got append_seed_data callback!");
+repo.appendSeedData(363, "new CSV!", function() {
+	console.log("Got appendSeedData callback!");
 });
 
-repo.truncate_seed_data(242, function() {
-	console.log("Got truncate_seed_data callback!");
+repo.truncateSeedData(242, function() {
+	console.log("Got truncateSeedData callback!");
 });
 
 repo.disconnect(function() {
