@@ -19,14 +19,14 @@ Tokens.prototype.connect = function(tenant_name, user_name, password, callback) 
 		credentials.tenant = tenant_name;
 	}
 
-	sendRequest(null, this.endpoint, "PUT", credentials, function(responseBody, e) {
-		if (e) {
+	sendRequest(null, this.endpoint, "PUT", credentials, function(error, responseBody) {
+		if (error) {
 			// Request failed.
-			callback(null, e);
+			callback(error, null);
 		} else {
 			// Success!
 			// Extract the token and send it on.
-			callback(responseBody.token);
+			callback(null, responseBody.token);
 		}
 	});
 };
@@ -81,17 +81,16 @@ function sendRequest(token, endpoint, method, requestBody, callback) {
 				}
 
 				// Consider anything in the 200-299 range to be success.
-				if (responseCode >= 200 && responseCode < 300) {
-					// Success!
-					callback(responseBody);
-				} else {
+				var error = null;
+				if (responseCode < 200 || responseCode >= 300) {
 					// Request failed.
-					var error = {
+					error = {
 						code: responseCode,
 						message: response.statusMessage
 					};
-					callback(responseBody, error);
 				}
+
+				callback(error, responseBody);
 			}
 		});
 
@@ -99,7 +98,7 @@ function sendRequest(token, endpoint, method, requestBody, callback) {
 	});
 
 	req.on('error', function(e) {
-		callback(null, e);
+		callback(e, null);
 	});
 
 	req.end(requestBody);

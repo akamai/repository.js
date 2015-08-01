@@ -5,10 +5,10 @@ var userName = "admin";
 var password = "";
 
 var repo = new SOASTA.Repository("http://localhost:8080/concerto/services/rest/RepositoryService/v1");
-repo.connect(tenantName, userName, password, function(e) {
 
-	if (e) {
-		console.log("Connect failed! " + e.message);
+repo.connect(tenantName, userName, password, function(error) {
+	if (error) {
+		console.log("Connect failed! " + error.message);
 	}
 	else {
 		console.log("Got connect callback!");
