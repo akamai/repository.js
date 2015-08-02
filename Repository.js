@@ -14,14 +14,12 @@ var SOASTA = {
 		var self = this;
 
 		this.connect = function(tenant_name, user_name, password, callback) {
-			// Wrap the provided callback with an in-between
-			// that extracts the token before proceeding.
+			// Wrap the provided callback with an in-between that extracts the token before proceeding.
 			var wrapper = function(error, token) {
 				debug_log("Got token: " + token + " or error: " + error);
 				self.token = token;
 
-				// We don't pass the token on, since the caller shouldn't
-				// need it for anything.
+				// We don't pass the token on, since the caller shouldn't need it for anything.
 				if (callback) {
 					callback(error);
 				}
