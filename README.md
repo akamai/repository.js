@@ -102,3 +102,8 @@ repo.connect(null, "my user name", "secret")
   });
 });
 ```
+
+# TODO
+
+* Tests using real unit test framework.
+* Use Grunt?
