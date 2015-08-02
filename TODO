@@ -1,5 +1,0 @@
-Documentation, including README.md.
-  Should include description of promises support.
-Tests using real unit test framework.
-Grunt for testing?
-Fix kludgey kludge in api_request.js.
