@@ -39,8 +39,8 @@ repo.connect(null, "my user name", "secret", function(error) {
           repo.truncateSeedData(id);
         });
       });
-   });
- }
+    });
+  }
 });
 ```
 
