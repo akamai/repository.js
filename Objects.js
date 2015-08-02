@@ -14,7 +14,11 @@ Objects.prototype.createObject = function(token, props, callback) {
 			callback(error, null);
 		} else {
 			// Success!
-			// Extract the newly-created object's ID and send it on.
+
+			// Response JSON will look like:
+			// { "id": 42 }
+
+                        // Extract the ID and return that in the callback.
 			callback(null, responseBody.id);
 		}
 	});

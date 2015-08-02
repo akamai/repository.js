@@ -23,7 +23,11 @@ Tokens.prototype.connect = function(tenant_name, user_name, password, callback) 
 			callback(error, null);
 		} else {
 			// Success!
-			// Extract the token and send it on.
+
+			// Response JSON will look like:
+			// { "token": "<random string>" }
+
+			// Extract the actual token and return that in the callback.
 			callback(null, responseBody.token);
 		}
 	});
