@@ -2,8 +2,8 @@ var SOASTA = require("./Repository.js");
 var Q = require("Q");
 
 var tenantName = null;
-var userName = "admin";
-var password = "";
+var userName = "my user name";
+var password = "secret";
 
 var seedDataID = 1;
 
