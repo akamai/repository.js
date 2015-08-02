@@ -27,7 +27,7 @@ Objects.prototype.createObject = function(token, props, callback) {
 Objects.prototype.getObjectByID = function(token, type, id, callback) {
 	debug_log("getObjectByID(token=" + token + ", type=" + type + ", id=" + id + ")");
 
-	var objectURL = this.endpoint + "/" + type + "/" + id;
+	var objectURL = this.getObjectURL(type, id);
 	api_request(token, objectURL, "GET", null, callback);
 }
 
@@ -54,15 +54,19 @@ Objects.prototype.queryObjects = function(token, type, query, callback) {
 Objects.prototype.updateObject = function(token, type, id, props, callback) {
 	debug_log("updateObject(token=" + token + ", type=" + type + ", id=" + id + ", props=" + JSON.stringify(props) + ")");
 
-	var objectURL = this.endpoint + "/" + type + "/" + id;
+	var objectURL = this.getObjectURL(type, id);
 	api_request(token, objectURL, "POST", props, callback);
 }
 
 Objects.prototype.deleteObject = function(token, type, id, callback) {
 	debug_log("deleteObject(token=" + token + ", type=" + type + ", id=" + id + ")");
 
-	var objectURL = this.endpoint + "/" + type + "/" + id;
+	var objectURL = this.getObjectURL(type, id);
 	api_request(token, objectURL, "DELETE", null, callback);
+}
+
+Objects.prototype.getObjectURL = function(type, id) {
+	return this.endpoint + "/" + type + "/" + id;
 }
 
 module.exports = Objects;

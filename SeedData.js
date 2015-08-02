@@ -8,22 +8,26 @@ function SeedData(service_url) {
 SeedData.prototype.readSeedData = function(token, id, callback) {
 	debug_log("readSeedData(token=" + token + ", id=" + id + ")");
 
-	var seedDataURL = this.endpoint + "/" + id;
+	var seedDataURL = this.getSeedDataURL(id);
 	api_request(token, seedDataURL, "GET", null, callback);
 };
 
 SeedData.prototype.appendSeedData = function(token, id, content, callback) {
 	debug_log("appendSeedData(token=" + token + ", id=" + id + ", content=" + content + ")");
 
-	var seedDataURL = this.endpoint + "/" + id;
+	var seedDataURL = this.getSeedDataURL(id);
 	api_request(token, seedDataURL, "POST", content, callback);
 };
 
 SeedData.prototype.truncateSeedData = function(token, id, callback) {
 	debug_log("truncateSeedData(token=" + token + ", id=" + id + ")");
 
-	var seedDataURL = this.endpoint + "/" + id;
+	var seedDataURL = this.getSeedDataURL(id);
 	api_request(token, seedDataURL, "DELETE", null, callback);
 };
+
+SeedData.prototype.getSeedDataURL = function(id) {
+	return this.endpoint + "/" + id;
+}
 
 module.exports = SeedData;
