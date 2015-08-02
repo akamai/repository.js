@@ -32,15 +32,16 @@ repo.connect(null, "my user name", "secret", function(error) {
       // Add some new data.
       repo.appendSeedData(id, "value1,value2,value3\nvalue4,value5,value6\nvalue7,value8,value9", function(error) {
         // Load it back!
-        repo.readSeedData(id, function(error) {
+        repo.readSeedData(id, function(error, content) {
           console.log("Seed data now looks like this: " + content);
 
           // Clear it out, to reset for next time.
           repo.truncateSeedData(id);
         });
       });
-  });
-}
+   });
+ }
+});
 ```
 
 The Repository class provides the following methods for reading and writing objects:
