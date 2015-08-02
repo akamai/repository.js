@@ -1,4 +1,5 @@
 var SOASTA = require("./Repository.js");
+var Q = require("Q");
 
 var tenantName = null;
 var userName = "admin";
@@ -6,13 +7,15 @@ var password = "";
 
 var repo = new SOASTA.Repository("http://localhost:8080/concerto/services/rest/RepositoryService/v1");
 
-repo.connect(tenantName, userName, password, function(error) {
-	if (error) {
-		console.log("Connect failed! " + error.message);
-	}
-	else {
-		console.log("Got connect callback!");
+var connect = Q.denodeify(repo.connect);
 
+connect(tenantName, userName, password).then(function() {
+	console.log("Got connect callback!");
+}, function(error) {
+	console.log("Connect failed! " + error.message);
+});
+
+/*
 repo.createObject({
 	name: "some name!",
 	type: "some type!"
@@ -58,3 +61,4 @@ repo.disconnect(function() {
 
 }
 });
+*/
