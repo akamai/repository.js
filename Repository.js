@@ -66,6 +66,22 @@ var SOASTA = {
 		this.disconnect = function(callback) {
 			tokens.disconnect(self.token, callback);
 		};
+
+		this.asPromises = function(Promises) {
+			var promisesRepository = new Repository(service_url);
+
+			for (name in promisesRepository) {
+				var func = promisesRepository[name];
+
+				if (typeof func === "function" && name !== "asPromises") {
+					debug_log("Replacing function " + name + " with promise-ified version.");
+					func = Promises.denodeify(func);
+					promisesRepository[name] = func;
+				}
+			}
+
+			return promisesRepository;
+		};
 	}
 }
 
