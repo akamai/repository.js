@@ -32,7 +32,8 @@ Tokens.prototype.connect = function(tenant_name, user_name, password, callback) 
 Tokens.prototype.disconnect = function(token, callback) {
 	debug_log("disconnect()");
 
-	api_request(null, this.endpoint + "/" + token, "DELETE", null, callback);
+	var tokenURL = this.endpoint + "/" + token;
+	api_request(null, tokenURL, "DELETE", null, callback);
 };
 
 module.exports = Tokens;
