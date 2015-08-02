@@ -43,7 +43,12 @@ function api_request(token, endpoint, method, requestBody, callback) {
 				if (responseBody.trim().length == 0) {
 					responseBody = null;
 				} else {
-					responseBody = JSON.parse(responseBody);
+					// TODO: Extra-kludgey kludge that needs to go away!  When I'm less tired.
+					var responseIsJSON = endpoint.indexOf("/SeedData/") < 0;
+
+					if (responseIsJSON) {
+						responseBody = JSON.parse(responseBody);
+					};
 				}
 
 				// Consider anything in the 200-299 range to be success.
@@ -60,11 +65,13 @@ function api_request(token, endpoint, method, requestBody, callback) {
 			}
 		});
 
-		response.on('error', console.log);
+		response.on('error', function(error) {
+			callback(error, null);
+		});
 	});
 
-	req.on('error', function(e) {
-		callback(e, null);
+	req.on('error', function(error) {
+		callback(error, null);
 	});
 
 	req.end(requestBody);

@@ -5,6 +5,8 @@ var tenantName = null;
 var userName = "admin";
 var password = "";
 
+var seedDataID = 1;
+
 var repo = new SOASTA.Repository("http://localhost:8080/concerto/services/rest/RepositoryService/v1");
 repo = repo.asPromises(Q);
 
@@ -32,13 +34,13 @@ repo.connect(tenantName, userName, password).then(function() {
 			return repo.deleteObject("preference", id);
 		}).then(function() {
 			console.log("Get deleteObject callback!");
-			return repo.readSeedData(121);
-		}).then(function() {
-			console.log("Get readSeedData callback!");
-			return repo.appendSeedData(363, "new CSV!");
+			return repo.appendSeedData(seedDataID, "new CSV!");
 		}).then(function() {
 			console.log("Get appendSeedData callback!");
-			return repo.truncateSeedData(242);
+			return repo.readSeedData(seedDataID);
+		}).then(function() {
+			console.log("Get readSeedData callback!");
+			return repo.truncateSeedData(seedDataID);
 		}).then(function() {
 			console.log("Get truncateSeedData callback!");
 		}).done();
