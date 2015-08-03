@@ -105,5 +105,6 @@ repo.connect(null, "my user name", "secret")
 
 # TODO
 
+* `readSeedData` and `appendSeedData` should use streams, to avoid buffering everything in memory.
 * Tests using real unit test framework.
 * Use Grunt?
