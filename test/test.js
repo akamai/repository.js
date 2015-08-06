@@ -1,9 +1,9 @@
-var SOASTA = require("./Repository.js");
+var SOASTA = require("../lib/model/Repository.js");
 var Q = require("Q");
 
 var tenantName = null;
-var userName = "my user name";
-var password = "secret";
+var userName = "SOASTA";
+var password = "password";
 
 var seedDataID = 1;
 

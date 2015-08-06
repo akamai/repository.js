@@ -63,7 +63,7 @@ To learn more about JavaScript promises, see [this article](http://www.html5rock
 
 The `asPromises` method takes a "bring-your-own-library" approach.  Rather than explicitly using [Q](https://github.com/kriskowal/q) or another implementation, it accepts any object that provides a `denodeify()` function.  Most of the popular Promises implementations include this.
 
-# Promise example
+## Promise example
 
 Here's the same example as above, using the promise-based version.
 
@@ -101,6 +101,31 @@ repo.connect(null, "my user name", "secret")
     return repo.truncateSeedData(id);
   });
 });
+```
+
+# Command-line Interace (CLI)
+
+A command-line wrapper is available via `cmd.js`:
+
+    node cmd.js
+
+The list of commands and other help is available via the `--help` command:
+
+    node cmd.js --help
+
+For example, to query all domains:
+
+    node cmd.js --username [user] --password [password] query domain
+
+You can put defaults for username, password, repository and tenant in an `auth.json` file:
+
+```
+{
+	"username": "",
+	"password": "",
+	"repository": "",
+    "tenant": ""
+}
 ```
 
 # TODO

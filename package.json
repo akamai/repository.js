@@ -1,0 +1,31 @@
+{
+  "name": "repository.js",
+  "version": "0.0.1",
+  "description": "SOASTA JavaScript repository access",
+  "main": "lib/model/Repository.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SOASTA/repository.js.git"
+  },
+  "author": "SOASTA, Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SOASTA/repository.js/issues"
+  },
+  "homepage": "https://github.com/SOASTA/repository.js#readme",
+  "dependencies": {
+    "commander": "^2.8.1",
+    "lodash": "^3.10.1",
+    "winston": "^1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-karma": "^0.12.0",
+    "grunt-mocha-test": "^0.12.7",
+    "gruntify-eslint": "^1.0.0",
+    "karma": "^0.13.7",
+    "mocha": "^2.2.5",
+    "q": "^1.4.1"
+  }
+}
