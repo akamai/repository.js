@@ -1,5 +1,6 @@
 var SOASTA = require("../lib/model/Repository.js");
 var Q = require("Q");
+var Stream = require("stream");
 
 var tenantName = null;
 var userName = "SOASTA";
@@ -34,10 +35,13 @@ repo.connect(tenantName, userName, password).then(function() {
 			return repo.deleteObject("preference", id);
 		}).then(function() {
 			console.log("Get deleteObject callback!");
-			return repo.appendSeedData(seedDataID, "new CSV!");
+			var csvReader = new Stream.Readable();
+			csvReader.push("new CSV!");
+			csvReader.push(null);
+			return repo.appendSeedData(seedDataID, csvReader);
 		}).then(function() {
 			console.log("Get appendSeedData callback!");
-			return repo.readSeedData(seedDataID);
+			return repo.readSeedData(seedDataID, process.stdout);
 		}).then(function() {
 			console.log("Get readSeedData callback!");
 			return repo.truncateSeedData(seedDataID);
