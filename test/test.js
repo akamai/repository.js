@@ -38,12 +38,12 @@ repo.connect(tenantName, userName, password).then(function() {
 			var csvReader = new Stream.Readable();
 			csvReader.push("new CSV!");
 			csvReader.push(null);
-			return repo.appendSeedData(seedDataID, csvReader);
+			return repo.appendSeedDataStream(seedDataID, csvReader);
 		}).then(function() {
 			console.log("Get appendSeedData callback!");
-			return repo.readSeedData(seedDataID, process.stdout);
-		}).then(function() {
-			console.log("Get readSeedData callback!");
+			return repo.readSeedData(seedDataID);
+		}).then(function(content) {
+			console.log("Get readSeedData callback! content=" + content);
 			return repo.truncateSeedData(seedDataID);
 		}).then(function() {
 			console.log("Get truncateSeedData callback!");
