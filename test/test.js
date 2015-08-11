@@ -41,6 +41,9 @@ repo.connect(tenantName, userName, password).then(function() {
 			return repo.appendSeedDataStream(seedDataID, csvReader);
 		}).then(function() {
 			console.log("Get appendSeedData callback!");
+			return repo.readSeedDataStream(seedDataID, process.stdout);
+		}).then(function() {
+			console.log("Get seedSeedDataStream callback!");
 			return repo.readSeedData(seedDataID);
 		}).then(function(content) {
 			console.log("Get readSeedData callback! content=" + content);
