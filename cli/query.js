@@ -1,5 +1,11 @@
 "use strict";
 
+/**
+ * @memberof CLI
+ * @desc
+ * Calls to repository to query for Objects are done through this sub-command
+ */
+
 //
 // Imports
 //

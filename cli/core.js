@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * @namespace CLI
+ * @desc
+ * CLI Namespace and commands underneath it correspond to commandline interface.
+ * You can use these commands to run repository.js from the commandline
+ */
+
 //
 // Imports
 //
