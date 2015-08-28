@@ -1,5 +1,6 @@
 var SOASTA = require("../lib/model/Repository.js");
 var Q = require("Q");
+var Stream = require("stream");
 
 var tenantName = null;
 var userName = "SOASTA";
@@ -34,18 +35,26 @@ repo.connect(tenantName, userName, password).then(function() {
 			return repo.deleteObject("preference", id);
 		}).then(function() {
 			console.log("Get deleteObject callback!");
-			return repo.appendSeedData(seedDataID, "new CSV!");
+			var csvReader = new Stream.Readable();
+			csvReader.push("new CSV!");
+			csvReader.push(null);
+			return repo.appendSeedDataStream(seedDataID, csvReader);
 		}).then(function() {
 			console.log("Get appendSeedData callback!");
-			return repo.readSeedData(seedDataID);
+			return repo.readSeedDataStream(seedDataID, process.stdout);
 		}).then(function() {
-			console.log("Get readSeedData callback!");
+			console.log("Get seedSeedDataStream callback!");
+			return repo.readSeedData(seedDataID);
+		}).then(function(content) {
+			console.log("Get readSeedData callback! content=" + content);
 			return repo.truncateSeedData(seedDataID);
 		}).then(function() {
 			console.log("Get truncateSeedData callback!");
+		}).catch(function(error) {
+			console.log("inner test ERROR! " + error.message);
 		}).done();
 	}).catch(function(error) {
-		console.log("ERROR! " + error.message);
+		console.log("createObject ERROR! " + error.message);
 
 	// No matter what I do, I can't seem to make this execute only *after* the above finishes.
 	// It always happens in the middle of the above promise chain.  Something I'm not understanding
