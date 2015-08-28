@@ -50,9 +50,11 @@ repo.connect(tenantName, userName, password).then(function() {
 			return repo.truncateSeedData(seedDataID);
 		}).then(function() {
 			console.log("Get truncateSeedData callback!");
+		}).catch(function(error) {
+			console.log("inner test ERROR! " + error.message);
 		}).done();
 	}).catch(function(error) {
-		console.log("ERROR! " + error.message);
+		console.log("createObject ERROR! " + error.message);
 
 	// No matter what I do, I can't seem to make this execute only *after* the above finishes.
 	// It always happens in the middle of the above promise chain.  Something I'm not understanding
