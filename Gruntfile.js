@@ -64,7 +64,7 @@ module.exports = function(grunt) {
                 options: {
                     destination: "doc",
                     readme: "README.md",
-                    "package": "package.json",
+                    package: "package.json",
                     template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
                     configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json",
                     plugins: [
