@@ -59,25 +59,25 @@ module.exports = function(grunt) {
                 frameworks: ["mocha"]
             }
         },
-	jsdoc: {
-	    dist: {
-		options: {
-		    destination: "doc",
-		    readme: "README.md",
-		    "package": "package.json",
-		    template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
-		    configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json",
-		    plugins: [
-			"node_modules/grunt-jsdoc/node_modules/jsdoc/plugins/markdown",
-			"node_modules/grunt-jsdoc/node_modules/jsdoc/plugins/summarize"
-		    ]
-		},
-		src: [
-		    "lib/**/*.js",
-		    "cli/*.js"
-		]
-	    }
-	},
+        jsdoc: {
+            dist: {
+                options: {
+                    destination: "doc",
+                    readme: "README.md",
+                    "package": "package.json",
+                    template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
+                    configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json",
+                    plugins: [
+                        "node_modules/grunt-jsdoc/node_modules/jsdoc/plugins/markdown",
+                        "node_modules/grunt-jsdoc/node_modules/jsdoc/plugins/summarize"
+                    ]
+                },
+                src: [
+                    "lib/**/*.js",
+                    "cli/*.js"
+                ]
+            }
+        },
         bower: {
             install: {
                 options: {
