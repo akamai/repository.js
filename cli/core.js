@@ -61,7 +61,7 @@ exports.init = function(options) {
 /**
  * Connects to the SOASTA repository and return when Connected
  *
- * @param {object} options Options
+ * @param {Object} options Options
  * @param {function(err, repo)} callback Callback
  */
 exports.connectToRepository = function(options, callback) {
