@@ -1,8 +1,11 @@
 {
-  "name": "repository.js",
+  "name": "soasta-repository",
   "version": "0.0.1",
   "description": "SOASTA JavaScript repository access",
   "main": "lib/model/Repository.js",
+  "bin": {
+    "soasta-repository": "./cmd.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SOASTA/repository.js.git"
