@@ -19,7 +19,8 @@
   "dependencies": {
     "commander": "^2.8.1",
     "lodash": "^3.10.1",
-    "winston": "^1.0.1"
+    "winston": "^1.0.1",
+    "xml2js": "^0.4.12"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
