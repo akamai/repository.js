@@ -16,5 +16,9 @@ program.command("query <type>")
     .description("query objects")
     .action(require("./cli/query.js"));
 
+program.command("boomerang-xml-upload <file>")
+    .description("Upload a boomerang version using an XML File")
+    .action(require("./cli/boomerang-xml-upload.js"));
+
 // go
 program.parse(process.argv);
