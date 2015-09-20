@@ -16,5 +16,9 @@ program.command("query <type>")
     .description("query objects")
     .action(require("./cli/query.js"));
 
+program.command("delete <type> <id>")
+    .description("delete objects")
+    .action(require("./cli/delete.js"));
+
 // go
 program.parse(process.argv);
