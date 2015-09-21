@@ -21,19 +21,19 @@ module.exports = function(type, id, file, options) {
         jsonObject = require(fullPath);
     }
     catch(exception) {
-        log.error(exception.message);
+        cmdCore.handleError(exception);
         process.exit(1);
     }
 
     cmdCore.connectToRepository(options, function(connectError, repo) {
-        handleError(connectError);
+        cmdCore.handleError(connectError);
 
         repo.objectExists(type, id, function(existsError, exists) {
-            handleError(existsError);
+            cmdCore.handleError(existsError);
 
             if (exists) {
                 repo.updateObject(type, id, jsonObject, function(updateError, result) {
-                    handleError(updateError);
+                    cmdCore.handleError(updateError);
                     log.debug(JSON.stringify(result, null, true));
                     log.info("Update was successful! New Object:");
                     var object = result.objects[0];
@@ -42,15 +42,8 @@ module.exports = function(type, id, file, options) {
                     log.info("New values: " + JSON.stringify(jsonObject));
                 });
             } else {
-                handleError(new Error("Object of type: " + type + " and id: " + id + " could not be found. Exiting..."));
+                cmdCore.handleError(new Error("Object of type: " + type + " and id: " + id + " could not be found. Exiting..."));
             }
         });
     });
 };
-
-function handleError (err) {
-    if (err) {
-        log.error(err.message);
-        process.exit(1);
-    }
-}
