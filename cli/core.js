@@ -70,3 +70,15 @@ exports.connectToRepository = function(options, callback) {
         return callback && callback(err, repo);
     });
 }
+
+/**
+ * If a none falsy value is passed in use that to log an error to console and exit
+ *
+ * @param {?Error} error - Error object or null
+ */
+exports.handleError = function (err) {
+    if (err) {
+        log.error(err.message);
+        process.exit(1);
+    }
+}

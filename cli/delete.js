@@ -11,16 +11,14 @@ module.exports = function(type, id, options) {
     cmdCore.init(options);
 
     cmdCore.connectToRepository(options, function(err, repo) {
+        cmdCore.handleError(err);
+
         repo.getObjectByID(type, id, function(err, result) {
-            if (!err) {
-                log.error(err.message);
-                process.exit(1);
-            }
+            cmdCore.handleError(err);
+
             repo.deleteObject(type, id, function(err, result) {
-                if (err) {
-                    log.error(err.message);
-                    process.exit(1);
-                }
+                cmdCore.handleError(err);
+
                 log.info("Object of type: " + type + " with id: " + id + "successfully deleted!");
                 process.exit(0);
             });
