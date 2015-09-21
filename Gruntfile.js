@@ -108,6 +108,14 @@ module.exports = function(grunt) {
                     captureFile: "tests/mocha.tap"
                 },
                 src: mochaTestFiles
+            },
+            coverage: {
+                options: {
+                    reporter: "html-cov",
+                    quiet: true,
+                    captureFile: "tests/coverage.html"
+                },
+                src: mochaTestFiles
             }
         },
         karma: {
