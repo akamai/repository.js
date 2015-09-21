@@ -26,6 +26,13 @@ var SOASTA = require("../lib/model/Repository.js");
  * @param {object} options Options
  */
 exports.init = function(options) {
+
+    if (options && options.parent && typeof options.parent.json === "undefined") {
+        log.transports.console.json =  false;
+    } else {
+        log.transports.console.json =  true;
+    }
+
     if (options && options.parent && options.parent.verbose) {
         log.transports.console.level = "debug";
     }
@@ -43,8 +50,6 @@ exports.init = function(options) {
     if (!options.parent.repository) {
         options.parent.repository = constants.REPOSITORY_URL;
     }
-
-    console.log(options.parent);
 
     // ensure username and password have been specified
     if (!options.parent.username) {
