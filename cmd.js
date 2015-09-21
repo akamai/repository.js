@@ -8,6 +8,7 @@ program
     .option("-p, --password <password>", "Password")
     .option("-t, --tenant <tenant>", "Tenant name")
     .option("-r, --repository <url>", "Repository URL")
+    .option("-j, --json", "Output as JSON")
     .option("-o, --output <file>", "Output file")
     .option("-v, --verbose", "Verbose debugging");
 
