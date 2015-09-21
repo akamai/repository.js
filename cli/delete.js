@@ -12,12 +12,12 @@ module.exports = function(type, id, options) {
 
     cmdCore.connectToRepository(options, function(err, repo) {
         repo.getObjectByID(type, id, function(err, result) {
-            if (err != null) {
+            if (!err) {
                 log.error(err.message);
                 process.exit(1);
             }
             repo.deleteObject(type, id, function(err, result) {
-                if (err != null) {
+                if (err) {
                     log.error(err.message);
                     process.exit(1);
                 }
