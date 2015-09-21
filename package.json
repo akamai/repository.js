@@ -1,8 +1,11 @@
 {
-  "name": "repository.js",
+  "name": "soasta-repository",
   "version": "0.0.1",
   "description": "SOASTA JavaScript repository access",
   "main": "lib/model/Repository.js",
+  "bin": {
+    "soasta-repository": "./cmd.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SOASTA/repository.js.git"
@@ -15,6 +18,7 @@
   "homepage": "https://github.com/SOASTA/repository.js#readme",
   "dependencies": {
     "commander": "^2.8.1",
+    "grunt-jsdoc": "^0.6.7",
     "lodash": "^3.10.1",
     "nock": "^2.10.0",
     "winston": "^1.0.1"

@@ -2,3 +2,5 @@ node_modules/
 auth.json
 tests/coverage.html
 tests/mocha.tap
+doc/
+*~

@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * @namespace CLI
+ * @desc
+ * CLI Namespace and commands underneath it correspond to commandline interface.
+ * You can use these commands to run repository.js from the commandline
+ */
+
 //
 // Imports
 //
@@ -54,7 +61,7 @@ exports.init = function(options) {
 /**
  * Connects to the SOASTA repository and return when Connected
  *
- * @param {object} options Options
+ * @param {Object} options Options
  * @param {function(err, repo)} callback Callback
  */
 exports.connectToRepository = function(options, callback) {
