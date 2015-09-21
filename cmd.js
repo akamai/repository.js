@@ -20,5 +20,9 @@ program.command("delete <type> <id>")
     .description("delete objects")
     .action(require("./cli/delete.js"));
 
+program.command("update <type> <id> <file>")
+    .description("Update an object in the repository based on the JSON formatted data in a file")
+    .action(require("./cli/update.js"));
+
 // go
 program.parse(process.argv);
