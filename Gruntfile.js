@@ -14,7 +14,10 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON("package.json"),
         eslint: {
             console: {
-                src: lintFiles
+                src: lintFiles,
+                options: {
+                    format: "compact"
+                }
             },
             build: {
                 options: {
