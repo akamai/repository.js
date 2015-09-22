@@ -2,6 +2,7 @@
 
 /**
  * @namespace CLI
+ * @name core
  * @desc
  * CLI Namespace and commands underneath it correspond to commandline interface.
  * You can use these commands to run repository.js from the commandline
@@ -21,6 +22,7 @@ var SOASTA = require("../lib/model/Repository.js");
 // Exports
 //
 /**
+ * @memberof CLI.core
  * Initializes the command-line interface
  *
  * @param {object} options Options
