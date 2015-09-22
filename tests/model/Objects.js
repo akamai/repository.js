@@ -164,7 +164,7 @@ describe("Objects Tests", function(){
 
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.queryObjects(1, type, query, function(err, result) {
-                assert.isNull(result);
+                assert.isUndefined(result);
                 assert.deepEqual(error, err);
                 done();
             });
@@ -231,8 +231,6 @@ describe("Objects Tests", function(){
                     .post("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
                     .replyWithError(error, function(){
                         assert.strictEqual(this.req.headers["x-auth-token"], token);
-                        data.references.push(update.references[0]);
-                        return error;
                     });
             var Objects = require(REQUIRE_CLASS);
             var constants = require(REQUIRE_CONSTANTS);
@@ -240,6 +238,54 @@ describe("Objects Tests", function(){
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.updateObject(token, type, id, update, function(err, result){
                 assert.deepEqual(err, error);
+                done();
+            });
+        });
+    });
+
+    describe("deleteObject", function() {
+        it("Should delete an object of id 1", function(done){
+            var type = "domain";
+            var id = 1;
+            var token = 1;
+            var objectsAPI = nock("http://mpulse.soasta.com")
+                    .delete("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
+                    .reply(200, function(){
+                        assert.strictEqual(this.req.headers["x-auth-token"], token);
+                        return "";
+                    });
+
+            var Objects = require(REQUIRE_CLASS);
+            var constants = require(REQUIRE_CONSTANTS);
+
+            var objects = new Objects(constants.REPOSITORY_URL);
+            objects.deleteObject(token, type, id, function(err, result){
+                assert.isNull(result);
+                assert.isNull(err);
+                done();
+            });
+        });
+
+        it("Should fail deleting the domain", function(done){
+            var type = "domain";
+            var id = 1;
+            var token = 1;
+            var expect = "";
+            var error = {code: 400, message: "Failed!"};
+
+            var objectsAPI = nock("http://mpulse.soasta.com")
+                    .delete("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
+                    .replyWithError(error, function(){
+                        assert.strictEqual(this.req.headers["x-auth-token"], token);
+                    });
+
+            var Objects = require(REQUIRE_CLASS);
+            var constants = require(REQUIRE_CONSTANTS);
+
+            var objects = new Objects(constants.REPOSITORY_URL);
+            objects.deleteObject(token, type, id, function(err, result){
+                assert.equal(err, error);
+                assert.isUndefined(result);
                 done();
             });
         });

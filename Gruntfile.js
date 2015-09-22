@@ -17,7 +17,8 @@
 var mochaTestFiles = [
     "tests/blanket.js",
     "tests/index.js",
-    "tests/model/*.js"
+    "tests/model/*.js",
+    "tests/errors/*.js"
 ];
 
 /**
