@@ -1,3 +1,80 @@
+/**
+ * @namespace BuildConfiguration
+ * @desc
+ * Documents the constants used during build and compilation as builtin
+ * compilation and build configuration documentation
+ *
+ * The build is executed through Grunt the generic taskrunner.
+ */
+
+/**
+ * @constant mochaTestFiles
+ * @memberof BuildConfiguration
+ * @type {String[]}
+ * @desc
+ * Array of files to use to run the Unittests on the code base
+ */
+var mochaTestFiles = [
+    "tests/blanket.js",
+    "tests/index.js",
+    "tests/model/*.js",
+    "tests/errors/*.js"
+];
+
+/**
+ * @constant coverageHtml
+ * @memberof BuildConfiguration
+ * @type {string}
+ * @desc
+ * Destination path to the unittest coverage report
+ */
+var coverageHtml = "tests/results/coverage.html";
+
+/**
+ * @constant junitReportFile
+ * @memberof BuildConfiguration
+ * @type {string}
+ * @desc
+ * Destination path for the JUnit XML format report of the UnitTest run
+ */
+var junitReportFile = "tests/results/junit.xml";
+
+/**
+ * @constant jsdocSourceFiles
+ * @memberof BuildConfiguration
+ * @type {String[]}
+ * @desc
+ * Array of file sources to generate the documentation from
+ */
+var jsdocSourceFiles = [
+    "lib/**/*.js",
+    "./*.js",
+    "node_modules/soasta-repository/lib/**/*.js"
+];
+
+/**
+ * @constant jsdocTutorialPath
+ * @memberof BuildConfiguration
+ * @type {string}
+ * @desc
+ * Directory containing tutorials and other documentation not to be distributed as source code files
+ */
+var jsdocTutorialPath = "doc/tutorials";
+
+/**
+ * @constant sourcePaths
+ * @memberof BuildConfiguration
+ * @type {string[]}
+ * @desc
+ * A list of all paths to javascript files
+ */
+var sourcePaths = [
+    "./lib/**/*.js",
+    "./Gruntfile.js",
+    "./index.js",
+    "./tests/**/*.js"
+];
+
 /* eslint-env node */
 module.exports = function(grunt) {
     "use strict";
@@ -32,11 +109,17 @@ module.exports = function(grunt) {
             test: {
                 options: {
                     reporter: "tap",
-                    captureFile: "test/mocha.tap"
+                    captureFile: "tests/mocha.tap"
                 },
-                src: [
-                    "test/*.js"
-                ]
+                src: mochaTestFiles
+            },
+            coverage: {
+                options: {
+                    reporter: "html-cov",
+                    quiet: true,
+                    captureFile: "tests/coverage.html"
+                },
+                src: mochaTestFiles
             }
         },
         karma: {

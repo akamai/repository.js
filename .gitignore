@@ -1,4 +1,7 @@
 node_modules/
 auth.json
 doc/soasta-repository
+tests/coverage.html
+tests/mocha.tap
+doc/
 *~
