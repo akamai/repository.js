@@ -2,7 +2,7 @@
   "name": "soasta-repository",
   "version": "0.0.1",
   "description": "SOASTA JavaScript repository access",
-  "main": "lib/model/Repository.js",
+  "main": "index.js",
   "bin": {
     "soasta-repository": "./cmd.js"
   },
