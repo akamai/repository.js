@@ -18,9 +18,7 @@
   "homepage": "https://github.com/SOASTA/repository.js#readme",
   "dependencies": {
     "commander": "^2.8.1",
-    "grunt-jsdoc": "^0.6.7",
     "lodash": "^3.10.1",
-    "nock": "^2.10.0",
     "winston": "^1.0.1"
   },
   "devDependencies": {
@@ -31,6 +29,8 @@
     "grunt-karma": "^0.12.0",
     "grunt-mocha-test": "^0.12.7",
     "gruntify-eslint": "^1.0.0",
+    "grunt-jsdoc": "^0.6.7",
+    "nock": "^2.10.0",
     "karma": "^0.13.7",
     "mocha": "^2.2.5",
     "nock": "^2.12.0",
