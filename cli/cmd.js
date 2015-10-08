@@ -15,7 +15,7 @@ var path = require("path");
 var fs = require("fs");
 
 program
-    .version(JSON.parse(fs.readFileSync(path.join("package.json"), "utf-8")).version)
+    .version(JSON.parse(fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf-8")).version)
     .option("-u, --username <username>", "User name")
     .option("-p, --password <password>", "Password")
     .option("-t, --tenant <tenant>", "Tenant name")
