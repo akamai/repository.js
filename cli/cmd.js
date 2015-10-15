@@ -37,4 +37,8 @@ program.command("update <type> <id> <file>")
     .description("Update an object in the repository based on the JSON formatted data in a file")
     .action(require("./update.js"));
 
+program.command("create <file>")
+    .description("Create a new object of type <type> based on the JSON data in <file>")
+    .action(require("./create.js"));
+
 exports.program = program;
