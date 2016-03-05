@@ -127,8 +127,3 @@ You can put defaults for username, password, repository and tenant in an `auth.j
     "tenant": ""
 }
 ```
-
-# TODO
-
-* `readSeedData` and `appendSeedData` should use streams, to avoid buffering everything in memory.
-* Tests using real unit test framework.
