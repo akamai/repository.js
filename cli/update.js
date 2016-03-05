@@ -13,18 +13,49 @@ var path = require("path");
 module.exports = function(type, id, file, options) {
     cmdCore.init(options);
 
-    var fullPath = path.resolve(file);
-    var jsonObject;
+    var data = "";
 
-    try {
-        fs.existsSync(fullPath);
-        jsonObject = require(fullPath);
+    if (!file || options.parent.stdin) {
+        process.stdin.setEncoding('utf8');
+
+        process.stdin.on('readable', function () {
+            var chunk = process.stdin.read();
+            if (chunk !== null) {
+                data += chunk;
+            }
+        });
+
+        process.stdin.on('end', function() {
+            log.debug(data);
+            try {
+                data = JSON.parse(data);
+            }
+            catch(err) {
+                cmdCore.handleError(err);
+            }
+
+            update(options, type, id, data);
+        });
     }
-    catch(exception) {
-        cmdCore.handleError(exception);
-        process.exit(1);
+    else {
+        var fullPath = path.resolve(file);
+        var jsonObject;
+
+        try {
+            fs.existsSync(fullPath);
+            jsonObject = require(fullPath);
+        }
+        catch(exception) {
+            cmdCore.handleError(exception);
+        }
+
+        update(options, type, id, jsonObject);
     }
 
+};
+
+function update(options, type, id, jsonObject)
+{
     cmdCore.connectToRepository(options, function(connectError, repo) {
         cmdCore.handleError(connectError);
 
@@ -37,13 +68,14 @@ module.exports = function(type, id, file, options) {
                     log.debug(JSON.stringify(result, null, true));
                     log.info("Update was successful! New Object:");
                     var object = result.objects[0];
-                    log.info("ID: " + object.id);
-                    log.info("Name: " + object.name);
-                    log.info("New values: " + JSON.stringify(jsonObject));
+                    log.log("info", "ID: " + object.id, {id: object.id});
+                    log.log("info", "Name: " + object.name, {name: object.name});
+                    log.log("info", "New values: " + JSON.stringify(jsonObject), jsonObject);
                 });
+                process.exit(0);
             } else {
                 cmdCore.handleError(new Error("Object of type: " + type + " and id: " + id + " could not be found. Exiting..."));
             }
         });
     });
-};
+}
