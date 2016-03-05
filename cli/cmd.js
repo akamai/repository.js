@@ -22,7 +22,8 @@ program
     .option("-r, --repository <url>", "Repository URL")
     .option("-j, --json", "Output as JSON")
     .option("-o, --output <file>", "Output file")
-    .option("-v, --verbose", "Verbose debugging");
+    .option("-v, --verbose", "Verbose debugging")
+    .option("-i, --stdin", "Use STDIN if file is required");
 
 // commands
 program.command("query <type>")
@@ -33,11 +34,11 @@ program.command("delete <type> <id>")
     .description("delete objects")
     .action(require("./delete.js"));
 
-program.command("update <type> <id> <file>")
+program.command("update <type> <id> [file]")
     .description("Update an object in the repository based on the JSON formatted data in a file")
     .action(require("./update.js"));
 
-program.command("create <file>")
+program.command("create [file]")
     .description("Create a new object of type <type> based on the JSON data in <file>")
     .action(require("./create.js"));
 

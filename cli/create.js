@@ -19,18 +19,20 @@ var path = require("path");
 module.exports = function(file, options) {
     cmdCore.init(options);
 
-    var filePath = path.resolve(file);
+    var data = "";
+    if (!file || options.parent.stdin) {
+        process.stdin.setEncoding('utf8');
 
-    fs.stat(filePath, function(err, stat) {
-        cmdCore.handleError(err);
+        process.stdin.on('readable', function () {
+            var chunk = process.stdin.read();
+            if (chunk !== null) {
+                data += chunk;
+            }
+        });
 
-        if (stat.isFile()) {
-
-            var filestr = fs.readFileSync(filePath, 'utf8');
-            var data;
-
+        process.stdin.on('end', function() {
             try {
-                data = JSON.parse(filestr);
+                data = JSON.parse(data);
             }
             catch(err) {
                 cmdCore.handleError(err);
@@ -38,15 +40,44 @@ module.exports = function(file, options) {
 
             log.debug(data);
 
-            cmdCore.connectToRepository(options, function(err, repo) {
-                cmdCore.handleError(err);
+            create(options, data);
+        });
+    }
+    else
+    {
+        var filePath = path.resolve(file);
+        fs.stat(filePath, function(err, stat) {
+            cmdCore.handleError(err);
 
-                repo.createObject(data, function(err, id) {
+            if (stat.isFile()) {
+                var filestr = fs.readFileSync(filePath, 'utf8');
+                var data;
+
+                try {
+                    data = JSON.parse(filestr);
+                }
+                catch(err) {
                     cmdCore.handleError(err);
+                }
 
-                    log.info("New ID is: " + id, {id: id});
-                });
-            });
-        }
-    });
+                log.debug(data);
+
+                create(options, data);
+            }
+        });
+    }
 };
+
+function create(options, data)
+{
+    cmdCore.connectToRepository(options, function(err, repo) {
+        cmdCore.handleError(err);
+
+        repo.createObject(data, function(err, id) {
+            cmdCore.handleError(err);
+
+            log.log("info", "New ID is: " + id, {id: id});
+            process.exit(0);
+        });
+    });
+}
