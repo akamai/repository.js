@@ -22,7 +22,8 @@ program
     .option("-r, --repository <url>", "Repository URL")
     .option("-j, --json", "Output as JSON")
     .option("-o, --output <file>", "Output file")
-    .option("-v, --verbose", "Verbose debugging");
+    .option("-v, --verbose", "Verbose debugging")
+    .option("-a, --auth <file>", "auth.json file containing credentials");
 
 // commands
 program.command("query <type>")
