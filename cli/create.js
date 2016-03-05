@@ -35,7 +35,8 @@ module.exports = function(file, options) {
             catch(err) {
                 cmdCore.handleError(err);
             }
-						log.debug(data);
+
+            log.debug(data);
 
             cmdCore.connectToRepository(options, function(err, repo) {
                 cmdCore.handleError(err);
@@ -43,7 +44,7 @@ module.exports = function(file, options) {
                 repo.createObject(data, function(err, id) {
                     cmdCore.handleError(err);
 
-                    log.info("New ID is: " + id);
+                    log.info("New ID is: " + id, {id: id});
                 });
             });
         }
