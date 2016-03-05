@@ -39,7 +39,7 @@ program.command("update <type> <id> [file]")
     .action(require("./update.js"));
 
 program.command("create [file]")
-    .description("Create a new object of type <type> based on the JSON data in <file>")
+    .description("Create a new object based on the JSON data in <file>")
     .action(require("./create.js"));
 
 exports.program = program;
