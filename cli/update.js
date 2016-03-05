@@ -47,7 +47,6 @@ module.exports = function(type, id, file, options) {
         }
         catch(exception) {
             cmdCore.handleError(exception);
-            process.exit(1);
         }
 
         update(options, type, id, jsonObject);
