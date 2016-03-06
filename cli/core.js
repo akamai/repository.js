@@ -28,6 +28,7 @@ var SOASTA = require("../lib/model/Repository.js");
  * @param {object} options Options
  */
 exports.init = function(options) {
+    var authJsonPath = "auth.json";
 
     if (options && options.parent && typeof options.parent.json === "undefined") {
         log.transports.console.json =  false;
@@ -39,9 +40,13 @@ exports.init = function(options) {
         log.transports.console.level = "debug";
     }
 
-    if (fs.existsSync("auth.json")) {
+    if (options && options.parent && options.parent.auth) {
+        authJsonPath = options.parent.auth;
+    }
+
+    if (fs.existsSync(authJsonPath)) {
         // read in auth info
-        var authContents = fs.readFileSync("auth.json", "utf-8");
+        var authContents = fs.readFileSync(authJsonPath, "utf-8");
         var auth = JSON.parse(authContents);
 
         // use auth contents as fallback
