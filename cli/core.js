@@ -46,7 +46,7 @@ exports.init = function(options) {
 
     if (fs.existsSync(authJsonPath)) {
         // read in auth info
-        var authContents = fs.readFileSync("auth.json", "utf-8");
+        var authContents = fs.readFileSync(authJsonPath, "utf-8");
         var auth = JSON.parse(authContents);
 
         // use auth contents as fallback
