@@ -66,13 +66,18 @@ function update(options, type, id, jsonObject)
                 repo.updateObject(type, id, jsonObject, function(updateError, result) {
                     cmdCore.handleError(updateError);
                     log.debug(JSON.stringify(result, null, true));
-                    log.info("Update was successful! New Object:");
-                    var object = result.objects[0];
-                    log.log("info", "ID: " + object.id, {id: object.id});
-                    log.log("info", "Name: " + object.name, {name: object.name});
-                    log.log("info", "New values: " + JSON.stringify(jsonObject), jsonObject);
+                    log.info("Update was successful!");
+
+                    if (result) {
+                        log.info("New Object:");
+                        var object = result.objects[0];
+                        log.log("info", "ID: " + object.id, {id: object.id});
+                        log.log("info", "Name: " + object.name, {name: object.name});
+                        log.log("info", "New values: " + JSON.stringify(jsonObject), jsonObject);
+                    }
+                    process.exit(0);
                 });
-                process.exit(0);
+                
             } else {
                 cmdCore.handleError(new Error("Object of type: " + type + " and id: " + id + " could not be found. Exiting..."));
             }
