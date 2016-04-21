@@ -11,7 +11,7 @@ Create a new `Repository` object and pass in the endpoint URL, then call `connec
 
 Example:
 ```JavaScript
-var SOASTA = require("Repository.js");
+var SOASTA = require("soasta-repository").SOASTA;
 var repo = new SOASTA.Repository("https://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1");
 
 // The first parameter is an optional tenant name.  If you're working in a multi-tenant environment,
@@ -68,7 +68,7 @@ The `asPromises` method takes a "bring-your-own-library" approach.  Rather than 
 Here's the same example as above, using the promise-based version.
 
 ```JavaScript
-var SOASTA = require("Repository.js");
+var SOASTA = require("soasta-repository").SOASTA;
 var Q = require("Q");
 
 var repo = new SOASTA.Repository("https://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1");
