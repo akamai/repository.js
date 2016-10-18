@@ -18,17 +18,19 @@ program
     .version(JSON.parse(fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf-8")).version)
     .option("-u, --username <username>", "User name")
     .option("-p, --password <password>", "Password")
+    .option("-T, --apitoken <apitoken>", "SSO API Token")
     .option("-t, --tenant <tenant>", "Tenant name")
     .option("-r, --repository <url>", "Repository URL")
     .option("-j, --json", "Output as JSON")
     .option("-o, --output <file>", "Output file")
     .option("-v, --verbose", "Verbose debugging")
     .option("-a, --auth <file>", "auth.json file containing credentials")
+    .option("-d, --details <boolean>", "Enable/Disable retrieving full objet details")
     .option("-i, --stdin", "Use STDIN if file is required");
 
 // commands
-program.command("query <type>")
-    .description("query objects")
+program.command("query <type> [<params>]")
+    .description("query for objects by type with optional parameters (comma separated)")
     .action(require("./query.js"));
 
 program.command("delete <type> <id>")

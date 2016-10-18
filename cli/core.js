@@ -58,16 +58,18 @@ exports.init = function(options) {
         options.parent.repository = constants.REPOSITORY_URL;
     }
 
+  if (!options.parent.apiToken) {
     // ensure username and password have been specified
     if (!options.parent.username) {
-        log.error("--username (-u) is required");
-        process.exit(1);
+      log.error("--username (-u) is required");
+      process.exit(1);
     }
 
     if (!options.parent.password) {
-        log.error("--password (-p) is required");
-        process.exit(1);
+      log.error("--password (-p) is required");
+      process.exit(1);
     }
+  }
 };
 
 /**
@@ -77,10 +79,17 @@ exports.init = function(options) {
  * @param {function(err, repo)} callback Callback
  */
 exports.connectToRepository = function(options, callback) {
-    var repo = new SOASTA.Repository(options.parent.repository);
-    repo.connect(options.parent.tenant, options.parent.username, options.parent.password, function(err) {
-        return callback && callback(err, repo);
+  var repo = new SOASTA.Repository(options.parent.repository);
+  if (options.parent.apiToken) {
+    repo.connectByApiToken(options.parent.tenantName || null, options.parent.apiToken, function(err) {
+      return callback && callback(err, repo);
     });
+  }
+  else {
+    repo.connect(options.parent.tenant, options.parent.username, options.parent.password, function(err) {
+      return callback && callback(err, repo);
+    });
+  }
 }
 
 /**

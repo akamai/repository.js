@@ -16,13 +16,29 @@ var fs = require("fs");
 //
 // Action
 //
-module.exports = function(type, options) {
+module.exports = function(type, params, options) {
+    var queryParams = params || {},
+        includeDetails = true;
+
+    // eg: tenant=1,name="mPulse Demo"
+    if (typeof queryParams === "string") {
+        var matchMultiParam = queryParams.match(/(.*,.*|=)/g);
+
+        if (matchMultiParam && matchMultiParam.length > 1) {
+            queryParams = queryParams.split(",");
+        }
+    }
+
+    if (typeof options.parent.details !== "undefined") {
+        includeDetails = JSON.parse(options.parent.details);
+    }
+
     cmdCore.init(options);
 
     cmdCore.connectToRepository(options, function(err, repo) {
         cmdCore.handleError(err);
 
-        repo.queryObjects(type, {}, function(err, data) {
+        repo.queryObjects(type, queryParams, includeDetails, function(err, data) {
             cmdCore.handleError(err);
 
             if (options.parent.output) {
