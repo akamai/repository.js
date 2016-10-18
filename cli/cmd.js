@@ -25,7 +25,7 @@ program
     .option("-o, --output <file>", "Output file")
     .option("-v, --verbose", "Verbose debugging")
     .option("-a, --auth <file>", "auth.json file containing credentials")
-    .option("-d, --details <boolean>", "Enable/Disable retrieving full objet details")
+    .option("-d, --details <boolean>", "Enable/Disable retrieving full object details")
     .option("-i, --stdin", "Use STDIN if file is required");
 
 // commands
