@@ -6,20 +6,25 @@
  * @desc
  * Exports the [Repository API Class]{@link SOASTA} to access SOASTA Repository API from NodeJS
  */
-exports.SOASTA = require("./lib/model/Repository");
+exports.SOASTA = require("./lib/model/Repository")("node");
 
-/**
- * @export cmd
- *
- * @desc
- * Exports the [Repository CLI API client]{@link cmd} to access the CLI application to interact from a shell with the Repository
- */
-exports.cmd = require("./cli/cmd").program;
+//cheap and dirty way to see if we're in a node context
+if(typeof window === "undefined")
+{
 
-/**
- * @export CLI
- *
- * @desc
- * Exports the [CLI utility class]{@link CLI} to initialize the API for CLI use
- */
-exports.CLI = require("./cli/core");
+  /**
+   * @export cmd
+   *
+   * @desc
+   * Exports the [Repository CLI API client]{@link cmd} to access the CLI application to interact from a shell with the Repository
+   */
+  exports.cmd = require("./cli/cmd").program;
+
+  /**
+   * @export CLI
+   *
+   * @desc
+   * Exports the [CLI utility class]{@link CLI} to initialize the API for CLI use
+   */
+  exports.CLI = require("./cli/core");
+}
