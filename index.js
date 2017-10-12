@@ -6,7 +6,7 @@
  * @desc
  * Exports the [Repository API Class]{@link SOASTA} to access SOASTA Repository API from NodeJS
  */
-exports.SOASTA = require("./lib/model/Repository")("node");
+exports.SOASTA = require("./lib/model/Repository");
 
 //cheap and dirty way to see if we're in a node context
 if(typeof window === "undefined")
