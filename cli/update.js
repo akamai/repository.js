@@ -16,36 +16,33 @@ module.exports = function(type, id, file, options) {
     var data = "";
 
     if (!file || options.parent.stdin) {
-        process.stdin.setEncoding('utf8');
+        process.stdin.setEncoding("utf8");
 
-        process.stdin.on('readable', function () {
+        process.stdin.on("readable", function() {
             var chunk = process.stdin.read();
             if (chunk !== null) {
                 data += chunk;
             }
         });
 
-        process.stdin.on('end', function() {
+        process.stdin.on("end", function() {
             log.debug(data);
             try {
                 data = JSON.parse(data);
-            }
-            catch(err) {
+            } catch (err) {
                 cmdCore.handleError(err);
             }
 
             update(options, type, id, data);
         });
-    }
-    else {
+    } else {
         var fullPath = path.resolve(file);
         var jsonObject;
 
         try {
             fs.existsSync(fullPath);
             jsonObject = require(fullPath);
-        }
-        catch(exception) {
+        } catch (exception) {
             cmdCore.handleError(exception);
         }
 
@@ -54,8 +51,7 @@ module.exports = function(type, id, file, options) {
 
 };
 
-function update(options, type, id, jsonObject)
-{
+function update(options, type, id, jsonObject) {
     cmdCore.connectToRepository(options, function(connectError, repo) {
         cmdCore.handleError(connectError);
 
@@ -79,7 +75,10 @@ function update(options, type, id, jsonObject)
                 });
                 
             } else {
-                cmdCore.handleError(new Error("Object of type: " + type + " and id: " + id + " could not be found. Exiting..."));
+                cmdCore.handleError(
+                  new Error("Object of type: " + type + 
+                    " and id: " + id + 
+                    " could not be found. Exiting..."));
             }
         });
     });

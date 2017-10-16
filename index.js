@@ -8,15 +8,14 @@
  */
 exports.SOASTA = require("./lib/model/Repository");
 
-//cheap and dirty way to see if we're in a node context
-if(typeof window === "undefined")
-{
-
+// cheap and dirty way to see if we're in a node context
+if (typeof window === "undefined") {
   /**
    * @export cmd
    *
    * @desc
-   * Exports the [Repository CLI API client]{@link cmd} to access the CLI application to interact from a shell with the Repository
+   * Exports the [Repository CLI API client]{@link cmd} to access the CLI application 
+   * to interact from a shell with the Repository
    */
   exports.cmd = require("./cli/cmd").program;
 
