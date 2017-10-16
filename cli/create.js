@@ -21,20 +21,19 @@ module.exports = function(file, options) {
 
     var data = "";
     if (!file || options.parent.stdin) {
-        process.stdin.setEncoding('utf8');
+        process.stdin.setEncoding("utf8");
 
-        process.stdin.on('readable', function () {
+        process.stdin.on("readable", function() {
             var chunk = process.stdin.read();
             if (chunk !== null) {
                 data += chunk;
             }
         });
 
-        process.stdin.on('end', function() {
+        process.stdin.on("end", function() {
             try {
                 data = JSON.parse(data);
-            }
-            catch(err) {
+            } catch (err) {
                 cmdCore.handleError(err);
             }
 
@@ -42,21 +41,18 @@ module.exports = function(file, options) {
 
             create(options, data);
         });
-    }
-    else
-    {
+    } else {
         var filePath = path.resolve(file);
         fs.stat(filePath, function(err, stat) {
             cmdCore.handleError(err);
 
             if (stat.isFile()) {
-                var filestr = fs.readFileSync(filePath, 'utf8');
+                var filestr = fs.readFileSync(filePath, "utf8");
                 var data;
 
                 try {
                     data = JSON.parse(filestr);
-                }
-                catch(err) {
+                } catch (err) {
                     cmdCore.handleError(err);
                 }
 
@@ -68,8 +64,7 @@ module.exports = function(file, options) {
     }
 };
 
-function create(options, data)
-{
+function create(options, data) {
     cmdCore.connectToRepository(options, function(err, repo) {
         cmdCore.handleError(err);
 

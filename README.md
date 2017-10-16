@@ -3,6 +3,7 @@ JavaScript (Node.js) wrapper for the [SOASTA Repository REST API](http://cdn.soa
 
 * Creating, reading, updating and deleting Repository objects.
 * Reading, writing, and deleting seed data.
+* Now with support for a web context!
 
 All methods follow the Node.js convention of accepting a callback with the signature `function(error, response)`.  A promise-based API is also available (see below).
 

@@ -85,8 +85,7 @@ exports.connectToRepository = function(options, callback) {
         repo.connectByApiToken(options.parent.tenantName || null, options.parent.apiToken, function(err) {
             return callback && callback(err, repo);
         });
-    }
-    else {
+    } else {
         repo.connect(options.parent.tenant, options.parent.username, options.parent.password, function(err) {
             return callback && callback(err, repo);
         });
@@ -96,9 +95,9 @@ exports.connectToRepository = function(options, callback) {
 /**
  * If a none falsy value is passed in use that to log an error to console and exit
  *
- * @param {?Error} error - Error object or null
+ * @param {?Error} err - Error object or null
  */
-exports.handleError = function (err) {
+exports.handleError = function(err) {
     if (err) {
         log.error(err.message);
         process.exit(1);
