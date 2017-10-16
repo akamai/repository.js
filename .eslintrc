@@ -47,6 +47,7 @@
         "quotes": [2, "double", "avoid-escape"],
         "no-use-before-define": [1, "nofunc"],
         "new-cap": 0,
+        "indent": [2, 4],
 
         //
         // Disabled
