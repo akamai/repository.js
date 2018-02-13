@@ -80,18 +80,19 @@ exports.init = function(options) {
  * @param {function(err, repo)} callback Callback
  */
 exports.connectToRepository = function(options, callback) {
-    var repo = new SOASTA.Repository(options.parent.repository);
-    if (options.parent.apiToken) {
-        repo.connectByApiToken(options.parent.tenantName || null, options.parent.apiToken, function(err) {
-            return callback && callback(err, repo);
-        });
-    } else {
-        repo.connect(options.parent.tenant, options.parent.username, options.parent.password, function(err) {
-            return callback && callback(err, repo);
-        });
-    }
+  var repo = new SOASTA.Repository(options.parent.repository);
+  var timeline = new SOASTA.Timeline(options.parent.repository);
+  if (options.parent.apiToken) {
+    timeline.connectByApiToken(options.parent.tenantName || null, options.parent.apiToken, function(err) {
+          return callback && callback(err, timeline);
+      });
+  } else {
+      repo.connect(options.parent.tenant, options.parent.username, options.parent.password, function(err, token) {
+          timeline.setToken(token);
+          return callback && callback(err, timeline);
+      });
+  }
 }
-
 /**
  * If a none falsy value is passed in use that to log an error to console and exit
  *
