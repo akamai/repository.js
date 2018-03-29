@@ -82,6 +82,8 @@ module.exports = function(grunt) {
     var lintFiles = [
         "*.js",
         "cli/*.js",
+        "cliAnnotation/*.js",
+        "cliTimeline/*.js",
         "lib/**/*.js",
         "test/*.js"
     ];
@@ -160,7 +162,9 @@ module.exports = function(grunt) {
                 },
                 src: [
                     "lib/**/*.js",
-                    "cli/*.js"
+                    "cli/*.js",
+                    "cliAnnotation/*.js",
+                    "cliTimeline/*.js"
                 ]
             }
         },
