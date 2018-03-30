@@ -4,7 +4,9 @@
   "description": "SOASTA JavaScript repository access",
   "main": "index.js",
   "bin": {
-    "soasta-repository": "./cmd.js"
+    "soasta-repository": "./cmd.js",
+    "soasta-repository-annotation": "./cmdAnnotation.js",
+    "soasta-repository-timeline": "./cmdTimeline.js"
   },
   "repository": {
     "type": "git",

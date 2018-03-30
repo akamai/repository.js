@@ -83,14 +83,14 @@ exports.connectToRepository = function(options, callback) {
     var repo = new SOASTA.Repository(options.parent.repository);
     var annotation = new SOASTA.Annotation(options.parent.repository);
     if (options.parent.apiToken) {
-      annotation.connectByApiToken(options.parent.tenantName || null, options.parent.apiToken, function(err) {
+        annotation.connectByApiToken(options.parent.tenantName || null, options.parent.apiToken, function(err) {
             return callback && callback(err, annotation);
         });
     } else {
-      repo.connect(options.parent.tenant, options.parent.username, options.parent.password, function(err, token) {
-          annotation.setToken(token);
-          return callback && callback(err, annotation);
-      });
+        repo.connect(options.parent.tenant, options.parent.username, options.parent.password, function(err, token) {
+            annotation.setToken(token);
+            return callback && callback(err, annotation);
+        });
     }
 }
 
