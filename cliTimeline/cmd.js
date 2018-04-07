@@ -11,6 +11,7 @@
  */
 
 var program = require("commander");
+var test = require("commander");
 var path = require("path");
 var fs = require("fs");
 
@@ -28,6 +29,23 @@ program
     .option("-d, --details <boolean>", "Enable/Disable retrieving full object details")
     .option("-i, --stdin", "Use STDIN if file is required");
 
+program.on("--help", function() {
+    console.log("  \n  Generate test data parameters:");
+    console.log("");
+    console.log("    $ testdata-gen --help");
+    console.log("");
+});
+
+program.parse(process.argv);
+if (process.argv.indexOf("testdata-gen") > -1) {
+    console.log(" \n  Optional parameters (comma separated)\n");
+    console.log("   count          count=    <number>                  Number timeline objects to be created");
+    console.log("   appIds         appIds=   <app ids>                 App ids");
+    console.log("   start          start=    <11234564512121>          Event start time in miliseconds");
+    console.log("   end            end=      <11234564512121>          Event end time in milisecond");
+    console.log(" \n");  
+}
+
 // commands
 program.command("query [<params>]")
     .description("query of timeline objects with optional parameters (comma separated)")
@@ -44,5 +62,9 @@ program.command("get <id>")
 program.command("create [file]")
     .description("Create a new timeline object based on the JSON data in <file>")
     .action(require("./create.js"));
+
+program.command("testdata [<params>]")
+.description("Create a new object with optional parameters (comma separated)")
+.action(require("./testdata.js"));
 
 exports.program = program;
