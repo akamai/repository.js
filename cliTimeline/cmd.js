@@ -11,7 +11,6 @@
  */
 
 var program = require("commander");
-var test = require("commander");
 var path = require("path");
 var fs = require("fs");
 
