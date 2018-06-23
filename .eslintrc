@@ -4,6 +4,9 @@
         "node": true,
         "amd": true
     },
+    parserOptions: {
+        ecmaVersion: 2017
+    },
     "globals": {
         "CryptoJS": true
     },

@@ -15,7 +15,7 @@ describe("Repository Tests", function(){
     });
 
     it("Should create an instance of SOASTA.Repository", function(){
-        var Repository = require(REQUIRE_CLASS).Repository;
+        var Repository = require(REQUIRE_CLASS);
 
         var repository = new Repository("");
 
@@ -34,7 +34,7 @@ describe("Repository Tests", function(){
                 .replyWithError(expect);
 
         var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS).Repository;
+        var Repository = require(REQUIRE_CLASS);
 
         var repository = new Repository(constants.REPOSITORY_URL);
 
@@ -63,7 +63,7 @@ describe("Repository Tests", function(){
                 });
 
         var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS).Repository;
+        var Repository = require(REQUIRE_CLASS);
 
         var repository = new Repository(constants.REPOSITORY_URL);
         repository = repository.asPromises(q);
@@ -90,7 +90,7 @@ describe("Repository Tests", function(){
                 });
 
         var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS).Repository;
+        var Repository = require(REQUIRE_CLASS);
 
         var repository = new Repository(constants.REPOSITORY_URL);
         var promiseRepo = repository.asPromises(q);
@@ -113,7 +113,7 @@ describe("Repository Tests", function(){
                 .replyWithError(expect);
 
         var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS).Repository;
+        var Repository = require(REQUIRE_CLASS);
 
         var repository = new Repository(constants.REPOSITORY_URL);
         var promiseRepo = repository.asPromises(q);

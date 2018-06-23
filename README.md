@@ -78,7 +78,7 @@ repo.connect(null, "my user name", "secret", function(error) {
     annotation.getAnnotationObjectsList({
       "date-start": "1515052740000"
     }, function(error, data) {
-		log.info(data);
+        log.info(data);
     });
   }
 });
@@ -112,7 +112,7 @@ repo.connect(null, "my user name", "secret", function(error) {
     timeline.getTimelineObjectsList({
       "date-start": "1515052740000"
     }, function(error, data) {
-		log.info(data);
+        log.info(data);
     });
   }
 });
@@ -187,9 +187,9 @@ You can put defaults for username, password, repository and tenant in an `auth.j
 
 ```
 {
-	"username": "",
-	"password": "",
-	"repository": "",
+    "username": "",
+    "password": "",
+    "repository": "",
     "tenant": ""
 }
 ```
@@ -211,9 +211,9 @@ You can put defaults for username, password, repository and tenant in an `auth.j
 
 ```
 {
-	"username": "",
-	"password": "",
-	"repository": "",
+    "username": "",
+    "password": "",
+    "repository": "",
     "tenant": ""
 }
 ```
@@ -235,9 +235,9 @@ You can put defaults for username, password, repository and tenant in an `auth.j
 
 ```
 {
-	"username": "",
-	"password": "",
-	"repository": "",
+    "username": "",
+    "password": "",
+    "repository": "",
     "tenant": ""
 }
 ```
