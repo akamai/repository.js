@@ -6,6 +6,9 @@ var path = require("path"),
 var REQUIRE_CLASS = path.join(__dirname, "..", "..", "lib", "model", "Objects.js");
 var REQUIRE_CONSTANTS = path.join(__dirname, "..", "..", "lib", "constants.js");
 
+var Objects = require(REQUIRE_CLASS);
+var constants = require(REQUIRE_CONSTANTS);
+
 var assert = chai.assert;
 
 describe("Objects Tests", function(){
@@ -14,9 +17,8 @@ describe("Objects Tests", function(){
     });
 
     it("Should create an instance of SOASTA.Repository", function(){
-        var expect = "/Objects";
-        var Objects = require(REQUIRE_CLASS);
-        var objects = new Objects("");
+        var expect = "http://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/Objects";
+        var objects = new Objects(constants.REPOSITORY_URL);
 
         assert.instanceOf(objects, Objects);
         assert.strictEqual(objects.endpoint, expect);
@@ -30,19 +32,14 @@ describe("Objects Tests", function(){
 
             var objectsAPI = nock("http://mpulse.soasta.com")
                     .put("/concerto/services/rest/RepositoryService/v1/Objects")
-                    .reply(200,  function(uri, requestBody) {
-                        var requestBodyObject = JSON.parse(requestBody);
-
+                    .reply(200,  function(uri, requestBodyObject) {
                         assert.deepEqual(properties, requestBodyObject);
                         return { id: expect };
                     });
 
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
-
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.createObject(1, properties, function(error, result) {
-                assert.isNull(error);
+                assert.isUndefined(error);
                 assert.deepEqual(result, expect);
 
                 done();
@@ -55,15 +52,10 @@ describe("Objects Tests", function(){
             var expect = { message: "Error", code: 500 };
             var objectsAPI = nock("http://mpulse.soasta.com")
                     .put("/concerto/services/rest/RepositoryService/v1/Objects")
-                    .replyWithError(expect, function(uri, requestBody) {
-                        var requestBodyObject = JSON.parse(requestBody);
-
+                    .replyWithError(expect, function(uri, requestBodyObject) {
                         assert.deepEqual(properties, requestBodyObject);
                         return expect;
                     });
-
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
 
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.createObject(1, properties, function(error, result) {
@@ -89,12 +81,9 @@ describe("Objects Tests", function(){
                         return expect;
                     });
 
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
-
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.getObjectByID(1, type, 1, function(error, result) {
-                assert.isNull(error);
+                assert.isUndefined(error);
                 assert.deepEqual(result, expect);
 
                 done();
@@ -111,9 +100,6 @@ describe("Objects Tests", function(){
                     .replyWithError(expect, function(uri, requestBody) {
                         assert.strictEqual(this.req.headers["x-auth-token"], 1);
                     });
-
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
 
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.getObjectByID(1, type, 1, function(error, result) {
@@ -136,12 +122,9 @@ describe("Objects Tests", function(){
                         return expect;
                     });
 
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
-
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.queryObjects(1, type, query, function(error, result) {
-                assert.isNull(error);
+                assert.isUndefined(error);
                 assert.deepEqual(result, expect);
                 done();
             });
@@ -158,9 +141,6 @@ describe("Objects Tests", function(){
                         assert.strictEqual(this.req.headers["x-auth-token"], 1);
                         return expect;
                     });
-
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
 
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.queryObjects(1, type, query, function(err, result) {
@@ -197,9 +177,6 @@ describe("Objects Tests", function(){
                         return data;
                     });
 
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
-
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.updateObject(token, type, id, update, function(err, result){
                 assert.deepEqual(update.references[0], result.references[1]);
@@ -232,8 +209,6 @@ describe("Objects Tests", function(){
                     .replyWithError(error, function(){
                         assert.strictEqual(this.req.headers["x-auth-token"], token);
                     });
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
 
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.updateObject(token, type, id, update, function(err, result){
@@ -255,13 +230,10 @@ describe("Objects Tests", function(){
                         return "";
                     });
 
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
-
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.deleteObject(token, type, id, function(err, result){
                 assert.isNull(result);
-                assert.isNull(err);
+                assert.isUndefined(err);
                 done();
             });
         });
@@ -278,9 +250,6 @@ describe("Objects Tests", function(){
                     .replyWithError(error, function(){
                         assert.strictEqual(this.req.headers["x-auth-token"], token);
                     });
-
-            var Objects = require(REQUIRE_CLASS);
-            var constants = require(REQUIRE_CONSTANTS);
 
             var objects = new Objects(constants.REPOSITORY_URL);
             objects.deleteObject(token, type, id, function(err, result){

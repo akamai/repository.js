@@ -7,6 +7,9 @@ var path = require("path"),
 var REQUIRE_CLASS = path.join(__dirname, "..", "..", "lib", "model", "Repository.js");
 var REQUIRE_CONSTANTS = path.join(__dirname, "..", "..", "lib", "constants.js");
 
+var constants = require(REQUIRE_CONSTANTS);
+var Repository = require(REQUIRE_CLASS);
+
 var assert = chai.assert;
 
 describe("Repository Tests", function(){
@@ -15,9 +18,7 @@ describe("Repository Tests", function(){
     });
 
     it("Should create an instance of SOASTA.Repository", function(){
-        var Repository = require(REQUIRE_CLASS);
-
-        var repository = new Repository("");
+        var repository = new Repository(constants.REPOSITORY_URL);
 
         assert.instanceOf(repository, Repository);
     });
@@ -33,20 +34,16 @@ describe("Repository Tests", function(){
                 .put("/concerto/services/rest/RepositoryService/v1/Tokens")
                 .replyWithError(expect);
 
-        var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS);
-
         var repository = new Repository(constants.REPOSITORY_URL);
 
         repository.connect(tenantname, username, password, function(error, result) {
             assert.deepEqual(error, expect);
-            assert.isUndefined(result);
+            assert.isNull(result);
             done();
         });
     });
 
     it("Should create a promise based version of Repository API", function(done){
-
         var token_expected = { token: "1" },
             tenantname = "soasta",
             username = "soasta",
@@ -61,9 +58,6 @@ describe("Repository Tests", function(){
                     assert.strictEqual(requestBodyObject.password, password);
                     return token_expected;
                 });
-
-        var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS);
 
         var repository = new Repository(constants.REPOSITORY_URL);
         repository = repository.asPromises(q);
@@ -89,9 +83,6 @@ describe("Repository Tests", function(){
                     return token_expected;
                 });
 
-        var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS);
-
         var repository = new Repository(constants.REPOSITORY_URL);
         var promiseRepo = repository.asPromises(q);
 
@@ -112,16 +103,17 @@ describe("Repository Tests", function(){
                 .put("/concerto/services/rest/RepositoryService/v1/Tokens")
                 .replyWithError(expect);
 
-        var constants = require(REQUIRE_CONSTANTS);
-        var Repository = require(REQUIRE_CLASS);
-
         var repository = new Repository(constants.REPOSITORY_URL);
         var promiseRepo = repository.asPromises(q);
 
-        promiseRepo.connect(tenantname, username, password).catch(function(error) {
-            assert.deepEqual(error, expect);
-            done();
-        });
+        promiseRepo.connect(tenantname, username, password)
+            .then(function() {
+                assert.fail("Should not have resolved");
+            })
+            .catch(function(error) {
+                assert.deepEqual(error, expect);
+                done();
+            });
     });
 
 });
