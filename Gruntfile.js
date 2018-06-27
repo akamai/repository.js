@@ -99,9 +99,9 @@ module.exports = function(grunt) {
             },
             build: {
                 options: {
-                    "output-file": "eslint.xml",
-                    "format": "jslint-xml",
-                    "silent": true
+                    outputFile: "eslint.xml",
+                    format: "jslint-xml",
+                    silent: true
                 },
                 src: lintFiles
             }
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
                 },
                 src: mochaTestFiles
             },
-            ci: {
+            build: {
                 options: {
                     reporter: "tap",
                     captureFile: "tests/mocha.tap",
@@ -156,7 +156,8 @@ module.exports = function(grunt) {
     //
     // Tasks
     //
-    grunt.registerTask("test", ["mochaTest"]);
+    grunt.registerTask("test", ["mochaTest:test"]);
+    grunt.registerTask("test:build", ["mochaTest:build"]);
 
     grunt.registerTask("lint", ["eslint:console"]);
     grunt.registerTask("lint:build", ["eslint:build"]);
@@ -164,6 +165,6 @@ module.exports = function(grunt) {
     //
     // Task Groups
     //
-    grunt.registerTask("default", ["lint"]);
-    grunt.registerTask("all", ["lint:build", "test"]);
+    grunt.registerTask("default", ["lint", "test"]);
+    grunt.registerTask("build", ["lint:build", "test:build"]);
 };
