@@ -55,15 +55,15 @@ program.command("delete <id>")
     .action(require("./delete.js"));
 
 program.command("get <id>")
-.description("get timeline object by id")
-.action(require("./get.js"));
+    .description("get timeline object by id")
+    .action(require("./get.js"));
 
 program.command("create [file]")
     .description("Create a new timeline object based on the JSON data in <file>")
     .action(require("./create.js"));
 
 program.command("testdata [<params>]")
-.description("Create a new object with optional parameters (comma separated)")
-.action(require("./testdata.js"));
+    .description("Create a new object with optional parameters (comma separated)")
+    .action(require("./testdata.js"));
 
 exports.program = program;

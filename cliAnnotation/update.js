@@ -65,8 +65,8 @@ function update(options, id, jsonObject) {
 
                     if (annotationUpdated) {
                         log.info("New Object:");
-                        log.log("info", "ID: " + annotationUpdated.id, {id: annotationUpdated.id});
-                        log.log("info", "Title: " + annotationUpdated.title, {title: annotationUpdated.title});
+                        log.log("info", "ID: " + annotationUpdated.id, { id: annotationUpdated.id });
+                        log.log("info", "Title: " + annotationUpdated.title, { title: annotationUpdated.title });
                         log.log("info", "New values: " + JSON.stringify(jsonObject), jsonObject);
                     }
                     process.exit(0);
@@ -74,7 +74,7 @@ function update(options, id, jsonObject) {
                 
             } else {
                 cmdCore.handleError(
-                  new Error("Object of type: " + type + 
+                    new Error("Object of type: " + type + 
                     " and id: " + id + 
                     " could not be found. Exiting..."));
             }
