@@ -15,7 +15,6 @@
  * Array of files to use to run the Unittests on the code base
  */
 var mochaTestFiles = [
-    "tests/blanket.js",
     "tests/index.js",
     "tests/model/*.js",
     "tests/errors/*.js"
@@ -110,41 +109,18 @@ module.exports = function(grunt) {
         mochaTest: {
             test: {
                 options: {
-                    reporter: "tap",
-                    captureFile: "tests/mocha.tap"
+                    reporter: "spec",
+                    clearRequireCache: true
                 },
                 src: mochaTestFiles
             },
-            coverage: {
+            ci: {
                 options: {
-                    reporter: "html-cov",
-                    quiet: true,
-                    captureFile: "tests/coverage.html"
+                    reporter: "tap",
+                    captureFile: "tests/mocha.tap",
+                    clearRequireCache: true
                 },
                 src: mochaTestFiles
-            }
-        },
-        karma: {
-            options: {
-                singleRun: true,
-                colors: true,
-                configFile: "./karma.config.js",
-                preprocessors: {
-                    "./src/*.js": ["coverage"]
-                },
-                basePath: "./",
-                files: [
-                    "lib/mocha/mocha.css",
-                    "lib/mocha/mocha.js",
-                    "lib/node-assert/assert.js",
-                    "lib/assertive-chai/dist/assertive-chai.js",
-                    "src/mpulse.js",
-                    "test/*.js"
-                ]
-            },
-            console: {
-                browsers: ["PhantomJS"],
-                frameworks: ["mocha"]
             }
         },
         jsdoc: {
@@ -167,21 +143,12 @@ module.exports = function(grunt) {
                     "cliTimeline/*.js"
                 ]
             }
-        },
-        bower: {
-            install: {
-                options: {
-                    targetDir: "lib"
-                }
-            }
         }
     });
 
     //
     // Plugins
     //
-    grunt.loadNpmTasks("grunt-bower-task");
-    grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-mocha-test");
     grunt.loadNpmTasks("gruntify-eslint");
     grunt.loadNpmTasks("grunt-jsdoc");
@@ -189,7 +156,7 @@ module.exports = function(grunt) {
     //
     // Tasks
     //
-    grunt.registerTask("test", ["bower:install", "mochaTest", "karma:console"]);
+    grunt.registerTask("test", ["mochaTest"]);
 
     grunt.registerTask("lint", ["eslint:console"]);
     grunt.registerTask("lint:build", ["eslint:build"]);

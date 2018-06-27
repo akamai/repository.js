@@ -51,11 +51,10 @@ describe("Repository Tests", function() {
 
         var repositoryAPI = nock("http://mpulse.soasta.com")
             .put("/concerto/services/rest/RepositoryService/v1/Tokens")
-            .reply(200,  function(uri, requestBody) {
-                var requestBodyObject = JSON.parse(requestBody);
-
+            .reply(200,  function(uri, requestBodyObject) {
                 assert.strictEqual(requestBodyObject.userName, username);
                 assert.strictEqual(requestBodyObject.password, password);
+
                 return token_expected;
             });
 
@@ -75,11 +74,10 @@ describe("Repository Tests", function() {
 
         var repositoryAPI = nock("http://mpulse.soasta.com")
             .put("/concerto/services/rest/RepositoryService/v1/Tokens")
-            .reply(200,  function(uri, requestBody) {
-                var requestBodyObject = JSON.parse(requestBody);
-
+            .reply(200,  function(uri, requestBodyObject) {
                 assert.strictEqual(requestBodyObject.userName, username);
                 assert.strictEqual(requestBodyObject.password, password);
+
                 return token_expected;
             });
 
