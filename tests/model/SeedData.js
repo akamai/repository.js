@@ -1,4 +1,4 @@
-/*global describe,it*/
+/* global describe,it*/
 var path = require("path"),
     fs = require("fs"),
     stream = require("stream"),
@@ -13,11 +13,11 @@ var assert = chai.assert;
 
 describe("SeedData Tests", function() {
 
-    it("Should require without problems", function(){
+    it("Should require without problems", function() {
         require(REQUIRE_CLASS);
     });
 
-    it("Should create an instance of SOASTA.Repository", function(){
+    it("Should create an instance of SOASTA.Repository", function() {
         var expect = "/SeedData";
         var SeedData = require(REQUIRE_CLASS);
         var seedData = new SeedData("");
@@ -26,19 +26,20 @@ describe("SeedData Tests", function() {
         assert.strictEqual(seedData.endpoint, expect);
     });
 
-    describe("readSeedData", function(){
-        it.skip("Should call readSeedData and succeed", function(done){
-            var seedDataCSV = "\"value1\",\"value2\",\"value3\",\"value4\",\"value5\",\"value6\",\"value7\",\"value7\"\n";
+    describe("readSeedData", function() {
+        it.skip("Should call readSeedData and succeed", function(done) {
+            var seedDataCSV = "\"value1\",\"value2\",\"value3\",\"value4\"," +
+                "\"value5\",\"value6\",\"value7\",\"value7\"\n";
             var token = 1;
             var objectsUrlAppend = "/SeedData";
             var id = 1;
 
             var seedDataAPI = nock("http://mpulse.soasta.com")
-                    .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + 1)
-                    .reply(200,  function() {
-                        assert.strictEqual(this.req.headers["x-auth-token"], token);
-                        return seedDataCSV;
-                    });
+                .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + 1)
+                .reply(200,  function() {
+                    assert.strictEqual(this.req.headers["x-auth-token"], token);
+                    return seedDataCSV;
+                });
 
             var SeedData = require(REQUIRE_CLASS);
             var constants = require(REQUIRE_CONSTANTS);
@@ -50,14 +51,14 @@ describe("SeedData Tests", function() {
             });
         });
 
-        it.skip("Should call readSeedData and fail", function(done){
+        it.skip("Should call readSeedData and fail", function(done) {
             var token = 1;
             var objectsUrlAppend = "/SeedData";
             var id = 1;
             var error = { code: 400, message: "failed" };
             var seedDataAPI = nock("http://mpulse.soasta.com")
-                    .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + id)
-                    .replyWithError(error);
+                .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + id)
+                .replyWithError(error);
 
             var SeedData = require(REQUIRE_CLASS);
             var constants = require(REQUIRE_CONSTANTS);
@@ -72,15 +73,15 @@ describe("SeedData Tests", function() {
     });
 
     describe("readSeedDataStream", function() {
-        it.skip("Should call readSeedDataStream and succeed", function(done){
+        it.skip("Should call readSeedDataStream and succeed", function(done) {
             var token = 1;
             var objectsUrlAppend = "/SeedData";
             var id = 1;
             var seedDataAPI = nock("http://mpulse.soasta.com")
-                    .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + id)
-                    .reply(200, function() {
-                        return fs.createReadStream(SUPPORT_FILE);
-                    });
+                .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + id)
+                .reply(200, function() {
+                    return fs.createReadStream(SUPPORT_FILE);
+                });
 
             var SeedData = require(REQUIRE_CLASS);
             var constants = require(REQUIRE_CONSTANTS);

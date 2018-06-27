@@ -71,7 +71,7 @@ function create(options, data) {
         annotation.createAnnotationObject(data, function(err, id) {
             cmdCore.handleError(err);
 
-            log.log("info", "New Annotation Object ID is: " + id, {id: id});
+            log.log("info", "New Annotation Object ID is: " + id, { id: id });
             process.exit(0);
         });
     });

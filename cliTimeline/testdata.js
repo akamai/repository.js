@@ -110,7 +110,7 @@ function generateRandomData(testParams) {
         break;
     }
 
-    timelineObject ["timelineItem"] = {timelineItemContent};
+    timelineObject ["timelineItem"] = { timelineItemContent };
     return timelineObject;
 }
 
@@ -272,9 +272,7 @@ function create(options, data, times, index) {
         timeline.createTimelineObject(data, function(err, id) {
             cmdCore.handleError(err);
 
-            log.log("info", "New Timeline Object ID is: " + id, {id: id});
-            // if(times == index+1)
-             // process.exit(0);
+            log.log("info", "New Timeline Object ID is: " + id, { id: id });
         });
     });
 }

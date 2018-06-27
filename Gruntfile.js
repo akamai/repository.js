@@ -85,7 +85,7 @@ module.exports = function(grunt) {
         "cliAnnotation/*.js",
         "cliTimeline/*.js",
         "lib/**/*.js",
-        "test/*.js"
+        "tests/**/*.js"
     ];
 
     // Project configuration.

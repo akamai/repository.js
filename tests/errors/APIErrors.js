@@ -1,4 +1,4 @@
-/*global describe,it*/
+/* global describe,it */
 var path = require("path"),
     chai = require("chai"),
     nock = require("nock");
@@ -15,17 +15,16 @@ describe("APIError Tests", function() {
         throw new APIError("Request Failed!", mockResponseObject, code);
     }
 
-
-    it("Should require without problems", function(){
+    it("Should require without problems", function() {
         require(REQUIRE_CLASS);
     });
 
-    it("Should create an instance of APIError", function(){
+    it("Should create an instance of APIError", function() {
         var REQUIRE_CLASS = path.join(__dirname, "..", "..", "lib", "errors", "APIError.js");
         var APIError = require(REQUIRE_CLASS);
         try {
             mockFunction(null, null);
-        } catch(error) {
+        } catch (error) {
             assert.instanceOf(error, APIError);
             assert.instanceOf(error, Error);
             assert.isString(error.stack);

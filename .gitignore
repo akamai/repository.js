@@ -5,3 +5,4 @@ tests/coverage.html
 tests/mocha.tap
 doc/
 *~
+bower_components/

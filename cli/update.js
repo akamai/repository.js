@@ -67,8 +67,8 @@ function update(options, type, id, jsonObject) {
                     if (result) {
                         log.info("New Object:");
                         var object = result.objects[0];
-                        log.log("info", "ID: " + object.id, {id: object.id});
-                        log.log("info", "Name: " + object.name, {name: object.name});
+                        log.log("info", "ID: " + object.id, { id: object.id });
+                        log.log("info", "Name: " + object.name, { name: object.name });
                         log.log("info", "New values: " + JSON.stringify(jsonObject), jsonObject);
                     }
                     process.exit(0);
@@ -76,7 +76,7 @@ function update(options, type, id, jsonObject) {
                 
             } else {
                 cmdCore.handleError(
-                  new Error("Object of type: " + type + 
+                    new Error("Object of type: " + type + 
                     " and id: " + id + 
                     " could not be found. Exiting..."));
             }

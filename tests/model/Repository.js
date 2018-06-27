@@ -1,4 +1,4 @@
-/*global describe,it*/
+/* global describe,it*/
 var path = require("path"),
     chai = require("chai"),
     nock = require("nock"),
@@ -12,27 +12,27 @@ var Repository = require(REQUIRE_CLASS);
 
 var assert = chai.assert;
 
-describe("Repository Tests", function(){
-    it("Should require without problems", function(){
+describe("Repository Tests", function() {
+    it("Should require without problems", function() {
         require(REQUIRE_CLASS);
     });
 
-    it("Should create an instance of SOASTA.Repository", function(){
+    it("Should create an instance of SOASTA.Repository", function() {
         var repository = new Repository(constants.REPOSITORY_URL);
 
         assert.instanceOf(repository, Repository);
     });
 
-    it("Should return an error in the callback on connect", function(done){
+    it("Should return an error in the callback on connect", function(done) {
         var token_expected = { token: "1" },
             tenantname = "doesnotexist",
             username = "doesnotexist",
             password = "doesnotexist",
-            expect = { code: 401, message: 'Unauthorized' };
+            expect = { code: 401, message: "Unauthorized" };
 
         var repositoryAPI = nock("http://mpulse.soasta.com")
-                .put("/concerto/services/rest/RepositoryService/v1/Tokens")
-                .replyWithError(expect);
+            .put("/concerto/services/rest/RepositoryService/v1/Tokens")
+            .replyWithError(expect);
 
         var repository = new Repository(constants.REPOSITORY_URL);
 
@@ -43,21 +43,21 @@ describe("Repository Tests", function(){
         });
     });
 
-    it("Should create a promise based version of Repository API", function(done){
+    it("Should create a promise based version of Repository API", function(done) {
         var token_expected = { token: "1" },
             tenantname = "soasta",
             username = "soasta",
             password = "password";
 
         var repositoryAPI = nock("http://mpulse.soasta.com")
-                .put("/concerto/services/rest/RepositoryService/v1/Tokens")
-                .reply(200,  function(uri, requestBody) {
-                    var requestBodyObject = JSON.parse(requestBody);
+            .put("/concerto/services/rest/RepositoryService/v1/Tokens")
+            .reply(200,  function(uri, requestBody) {
+                var requestBodyObject = JSON.parse(requestBody);
 
-                    assert.strictEqual(requestBodyObject.userName, username);
-                    assert.strictEqual(requestBodyObject.password, password);
-                    return token_expected;
-                });
+                assert.strictEqual(requestBodyObject.userName, username);
+                assert.strictEqual(requestBodyObject.password, password);
+                return token_expected;
+            });
 
         var repository = new Repository(constants.REPOSITORY_URL);
         repository = repository.asPromises(q);
@@ -67,21 +67,21 @@ describe("Repository Tests", function(){
         });
     });
 
-    it("Should return an instance of Repository as a promise and connect with promises", function(done){
+    it("Should return an instance of Repository as a promise and connect with promises", function(done) {
         var token_expected = { token: "1" },
             tenantname = "soasta",
             username = "soasta",
             password = "password";
 
         var repositoryAPI = nock("http://mpulse.soasta.com")
-                .put("/concerto/services/rest/RepositoryService/v1/Tokens")
-                .reply(200,  function(uri, requestBody) {
-                    var requestBodyObject = JSON.parse(requestBody);
+            .put("/concerto/services/rest/RepositoryService/v1/Tokens")
+            .reply(200,  function(uri, requestBody) {
+                var requestBodyObject = JSON.parse(requestBody);
 
-                    assert.strictEqual(requestBodyObject.userName, username);
-                    assert.strictEqual(requestBodyObject.password, password);
-                    return token_expected;
-                });
+                assert.strictEqual(requestBodyObject.userName, username);
+                assert.strictEqual(requestBodyObject.password, password);
+                return token_expected;
+            });
 
         var repository = new Repository(constants.REPOSITORY_URL);
         var promiseRepo = repository.asPromises(q);
@@ -92,16 +92,16 @@ describe("Repository Tests", function(){
         });
     });
 
-    it("Should return an error on connect and catch in promise", function(done){
+    it("Should return an error on connect and catch in promise", function(done) {
         var token_expected = { token: "1" },
             tenantname = "doesnotexist",
             username = "doesnotexist",
             password = "doesnotexist",
-            expect = { code: 401, message: 'Unauthorized' };
+            expect = { code: 401, message: "Unauthorized" };
 
         var repositoryAPI = nock("http://mpulse.soasta.com")
-                .put("/concerto/services/rest/RepositoryService/v1/Tokens")
-                .replyWithError(expect);
+            .put("/concerto/services/rest/RepositoryService/v1/Tokens")
+            .replyWithError(expect);
 
         var repository = new Repository(constants.REPOSITORY_URL);
         var promiseRepo = repository.asPromises(q);
