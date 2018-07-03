@@ -71,7 +71,7 @@ function create(options, data) {
         repo.createObject(data, function(err, id) {
             cmdCore.handleError(err);
 
-            log.log("info", "New ID is: " + id, {id: id});
+            log.log("info", "New ID is: " + id, { id: id });
             process.exit(0);
         });
     });

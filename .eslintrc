@@ -2,7 +2,11 @@
     "env": {
         "browser": true,
         "node": true,
-        "amd": true
+        "amd": true,
+        "es6": true
+    },
+    parserOptions: {
+        ecmaVersion: 2017
     },
     "globals": {
         "CryptoJS": true
@@ -35,9 +39,9 @@
         "no-multiple-empty-lines": [1, {"max": 1}],
         "no-nested-ternary": 2,
         "space-before-function-paren": [2, "never"],
-        "space-after-keywords": 1,
+        "keyword-spacing": 1,
         "space-before-blocks": 1,
-        "object-curly-spacing": 1,
+        "object-curly-spacing": [1, "always"],
         "computed-property-spacing": 1,
         "array-bracket-spacing": 1,
         "space-in-parens": 1,

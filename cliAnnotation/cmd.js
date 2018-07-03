@@ -55,19 +55,19 @@ program.command("delete <id>")
     .action(require("./delete.js"));
 
 program.command("get <id>")
-.description("get timeline object by id")
-.action(require("./get.js"));
+    .description("get timeline object by id")
+    .action(require("./get.js"));
 
 program.command("create [file]")
     .description("Create a new annotation object based on the JSON data in <file>")
     .action(require("./create.js"));
 
 program.command("update <id> [file]")
-.description("Update an annotation object in the repository based on the JSON formatted data in a file")
-.action(require("./update.js"));
+    .description("Update an annotation object in the repository based on the JSON formatted data in a file")
+    .action(require("./update.js"));
 
 program.command("testdata [<params>]")
-.description("Create a new object with optional parameters (comma separated)")
-.action(require("./testdata.js"));
+    .description("Create a new object with optional parameters (comma separated)")
+    .action(require("./testdata.js"));
 
 exports.program = program;

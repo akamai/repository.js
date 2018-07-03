@@ -71,7 +71,7 @@ function create(options, data) {
         timeline.createTimelineObject(data, function(err, id) {
             cmdCore.handleError(err);
 
-            log.log("info", "New Timeline Object ID is: " + id, {id: id});
+            log.log("info", "New Timeline Object ID is: " + id, { id: id });
             process.exit(0);
         });
     });

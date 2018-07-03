@@ -38,7 +38,7 @@ if (typeof window === "undefined") {
      */
     exports.cmd = require("./cliAnnotation/cmd").program;
 
-     /**
+    /**
      * @export CLI
      *
      * @desc
@@ -46,21 +46,21 @@ if (typeof window === "undefined") {
      */
     exports.CLI = require("./cliAnnotation/core");
 
-     /**
-      * @export cmdTimeline
-      *
-      * @desc
-      * Exports the [Timeline CLI API client]{@link cmd} to access the CLI application
-      * to interact from a shell with the Repository
-      */
+    /**
+     * @export cmdTimeline
+     *
+     * @desc
+     * Exports the [Timeline CLI API client]{@link cmd} to access the CLI application
+     * to interact from a shell with the Repository
+     */
     exports.cmd = require("./cliTimeline/cmd").program;
 
-      /**
-      * @export CLI
-      *
-      * @desc
-      * Exports the [CLI utility class]{@link CLI} to initialize the API for CLI use
-      */
+    /**
+     * @export CLI
+     *
+     * @desc
+     * Exports the [CLI utility class]{@link CLI} to initialize the API for CLI use
+     */
     exports.CLI = require("./cliTimeline/core");
 
 }
