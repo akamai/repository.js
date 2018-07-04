@@ -48,12 +48,9 @@ module.exports = function(type, params, options) {
             }
         };
 
-        if(type === 'token')
-        {
+        if (type === "token") {
             repo.getToken(callBack);
-        }
-        else
-        {
+        } else {
             repo.queryObjects(type, queryParams, includeDetails, callBack);
         }
     });
