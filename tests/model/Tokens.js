@@ -71,7 +71,6 @@ describe("Tokens Tests", function() {
         });
 
         it("Should try to get a Token but fail", function(done) {
-            var objectsUrlAppend = "/Tokens";
             var id = "sdadas-fsd-sdf-sdfg";
             var expect = { message: "Error", code: 500 };
             var tokensAPI = nock("http://mpulse.soasta.com")
