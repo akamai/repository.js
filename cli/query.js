@@ -38,7 +38,7 @@ module.exports = function(type, params, options) {
     cmdCore.connectToRepository(options, function(err, repo) {
         cmdCore.handleError(err);
 
-        repo.queryObjects(type, queryParams, includeDetails, function(err, data) {
+        var callBack = function(err, data) {
             cmdCore.handleError(err);
 
             if (options.parent.output) {
@@ -46,6 +46,12 @@ module.exports = function(type, params, options) {
             } else {
                 log.info(data);
             }
-        });
+        };
+
+        if (type === "token") {
+            repo.getToken(callBack);
+        } else {
+            repo.queryObjects(type, queryParams, includeDetails, callBack);
+        }
     });
 };

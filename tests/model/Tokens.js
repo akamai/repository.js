@@ -6,6 +6,9 @@ var path = require("path"),
 var REQUIRE_CLASS = path.join(__dirname, "..", "..", "lib", "model", "Tokens.js");
 var REQUIRE_CONSTANTS = path.join(__dirname, "..", "..", "lib", "constants.js");
 
+var constants = require(REQUIRE_CONSTANTS);
+var Tokens = require(REQUIRE_CLASS);
+
 var assert = chai.assert;
 
 describe("Tokens Tests", function() {
@@ -14,9 +17,8 @@ describe("Tokens Tests", function() {
     });
 
     it("Should create an instance of SOASTA.Repository", function() {
-        var expect = "/Tokens";
-        var Tokens = require(REQUIRE_CLASS);
-        var tokens = new Tokens("");
+        var expect = "http://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/Tokens";
+        var tokens = new Tokens(constants.REPOSITORY_URL);
 
         assert.instanceOf(tokens, Tokens);
         assert.strictEqual(tokens.endpoint, expect);
@@ -38,14 +40,50 @@ describe("Tokens Tests", function() {
                     return token_expected;
                 });
 
-            var constants = require(REQUIRE_CONSTANTS);
-            var Tokens = require(REQUIRE_CLASS);
-
             var tokens = new Tokens(constants.REPOSITORY_URL);
 
             tokens.connect(tenantname, username, password, function(error, token) {
                 assert.strictEqual(token, token_expected.token);
                 assert.isNull(error);
+                done();
+            });
+        });
+    });
+
+    describe("getToken", function() {
+        it("Should retrieve a Token successfully and return it as object", function(done) {
+            var expect = { a: 1, b:2 , c:3 };
+            var id = "sdadas-fsd-sdf-sdfg";
+
+            var tokensAPI = nock("http://mpulse.soasta.com")
+                .get("/concerto/services/rest/RepositoryService/v1/Tokens/" + id)
+                .reply(200, function(uri, requestBody) {
+                    return expect;
+                });
+
+            var tokens = new Tokens(constants.REPOSITORY_URL);
+            tokens.getToken(id, function(error, result) {
+                assert.isNull(error);
+                assert.deepEqual(result, expect);
+
+                done();
+            });
+        });
+
+        it("Should try to get a Token but fail", function(done) {
+            var id = "sdadas-fsd-sdf-sdfg";
+            var expect = { message: "Error", code: 500 };
+            var tokensAPI = nock("http://mpulse.soasta.com")
+                .get("/concerto/services/rest/RepositoryService/v1/Tokens/" + id)
+                .replyWithError(expect, function(uri, requestBody) {
+                    return requestBody;
+                });
+
+            var tokens = new Tokens(constants.REPOSITORY_URL);
+            tokens.getToken(id, function(error, result) {
+                assert.isNull(result);
+                assert.deepEqual(error, expect);
+
                 done();
             });
         });
@@ -71,9 +109,6 @@ describe("Tokens Tests", function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], 1);
                     return null;
                 });
-
-            var constants = require(REQUIRE_CONSTANTS);
-            var Tokens = require(REQUIRE_CLASS);
 
             var tokens = new Tokens(constants.REPOSITORY_URL);
 
