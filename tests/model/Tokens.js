@@ -52,18 +52,19 @@ describe("Tokens Tests", function() {
 
     describe("getToken", function() {
         it("Should retrieve a Token successfully and return it as object", function(done) {
-            var expect = { a: 1, b:2 , c:3 };
+            var expect = { a: 1, b:2, c:3 };
             var id = "sdadas-fsd-sdf-sdfg";
 
             var tokensAPI = nock("http://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Tokens/" + id)
                 .reply(200, function(uri, requestBody) {
+                    assert.strictEqual(this.req.headers["x-source"], "script");
                     return expect;
                 });
 
             var tokens = new Tokens(constants.REPOSITORY_URL);
-            tokens.getToken(id, function(error, result) {
-                assert.isNull(error);
+            tokens.getToken(id, "script", function(error, result) {
+                assert.isUndefined(error);
                 assert.deepEqual(result, expect);
 
                 done();
@@ -80,8 +81,8 @@ describe("Tokens Tests", function() {
                 });
 
             var tokens = new Tokens(constants.REPOSITORY_URL);
-            tokens.getToken(id, function(error, result) {
-                assert.isNull(result);
+            tokens.getToken(id, "script", function(error, result) {
+                assert.isUndefined(result);
                 assert.deepEqual(error, expect);
 
                 done();

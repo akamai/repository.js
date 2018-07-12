@@ -49,7 +49,7 @@ module.exports = function(type, params, options) {
         };
 
         if (type === "token") {
-            repo.getToken(callBack);
+            repo.getToken("cli", callBack);
         } else {
             repo.queryObjects(type, queryParams, includeDetails, callBack);
         }
