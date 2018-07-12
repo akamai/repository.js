@@ -55,10 +55,10 @@ function createAnnotationJSON(testParams, options) {
 function generateRandomData(testParams) {
 
     var annotationObject = {};
-    var typeArray = ["USER_ENTERED", "CT_VU_RAMP", "CT_VU_STEADY","CT_SYSTEM_EVENT", "MP_ALERT", "DIMENSION_EXPLOSION"];
+    var typeArray = ["USER_ENTERED", "MP_ALERT","DIMENSION_EXPLOSION"];
     var titleArray = ["AURIBUS TENEO LUPUM", 
-        "Ex Nihilo Nihil Fi",
-        "CASTIGAT RIDENDO MORES"];
+                      "Ex Nihilo Nihil Fi",
+                      "CASTIGAT RIDENDO MORES"];
     var textArray = [
         "Lorem ipsum dolor sit amet, eos ne odio mediocrem, eum commune definitiones at, " +
         "cu pro veniam essent antiopam. " +
@@ -78,7 +78,7 @@ function generateRandomData(testParams) {
     annotationObject ["text"] = textArray[Math.floor(Math.random() * textArray.length)];;
     annotationObject ["start"] = "";
     annotationObject ["end"] = "";
-    annotationObject ["domainIds"] = "";
+    annotationObject ["domainIds"] = 1;
 
     // set up the cmd line data
     for (var data = 0; data < testParams.length; data++) {
@@ -141,8 +141,8 @@ function create(options, data, times, index) {
             cmdCore.handleError(err);
 
             log.log("info", "New Annotation Object ID is: " + id, { id: id });
-            //          if(times == index+1)
-            //            process.exit(0);
+//          if(times == index+1)
+//            process.exit(0);
         });
     });
 }
