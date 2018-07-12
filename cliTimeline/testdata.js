@@ -114,7 +114,7 @@ function generateRandomData(testParams) {
         break;
     }
   
-    // timelineObject ["timelineItem"] = { timelineItemContent };  // verify !!!
+    timelineObject ["timelineItem"] = { timelineItemContent };  // verify !!!
     return timelineObject;
 }
 
