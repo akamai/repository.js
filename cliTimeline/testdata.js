@@ -113,13 +113,9 @@ function generateRandomData(testParams) {
             timelineItemContent ["category"], timelineItemContent ["text"]);
         break;
     }
-  
-    timelineObject ["timelineItem"] = { timelineItemContent };  // verify !!!
+    
+    timelineObject ["timelineItem"] = { timelineItemContent };
     return timelineObject;
-}
-
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
 function createBadgesContent(title, category, start) {
