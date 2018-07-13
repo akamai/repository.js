@@ -218,7 +218,7 @@ function createInsightsContent(title, text) {
         });
     } else if (timelineItemContent ["category"] == "eventDesktopUser" || 
         timelineItemContent ["category"] == "eventMobileUser") {
-        var increaseDropArray = ["true","false"];
+        var increaseDropArray = [true,false];
         var increaseDrop = increaseDropArray[Math.floor(Math.random() * increaseDropArray.length)];  
         var dropOrIncreasePercentage = Number(Math.floor(Math.random() * (100 - 1 + 1))) + Number(1);
         var dropOrIncreaseNumber = (Number((Math.random() * (50 - 1 + 1))) + Number(1)).toFixed(1);
