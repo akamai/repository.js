@@ -79,7 +79,8 @@ function generateRandomData(testParams) {
     timelineObject ["TimelineItemType"] = typeArray[Math.floor(Math.random() * typeArray.length)];
     timelineObject ["start"] = "";
     timelineObject ["end"] = "";
-    timelineObject ["appIds"] = 1;
+    // mPulseDemo id=1 (default) 
+    timelineObject ["appIds"] = 1; 
     timelineItemContent ["category"] = categoryArray[Math.floor(Math.random() * categoryArray.length)];;
         
     // set up the cmd line data
@@ -303,8 +304,8 @@ function create(options, data, times, index) {
             cmdCore.handleError(err);
 
             log.log("info", "New Timeline Object ID is: " + id, { id: id });
-            // if(times == index+1)
-             // process.exit(0);
+            if(times == index+1)
+                process.exit(0);
         });
     });
 }
