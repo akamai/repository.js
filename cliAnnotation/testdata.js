@@ -57,8 +57,8 @@ function generateRandomData(testParams) {
     var annotationObject = {};
     var typeArray = ["USER_ENTERED", "MP_ALERT","DIMENSION_EXPLOSION"];
     var titleArray = ["AURIBUS TENEO LUPUM", 
-                      "Ex Nihilo Nihil Fi",
-                      "CASTIGAT RIDENDO MORES"];
+        "Ex Nihilo Nihil Fi",
+        "CASTIGAT RIDENDO MORES"];
     var textArray = [
         "Lorem ipsum dolor sit amet, eos ne odio mediocrem, eum commune definitiones at, " +
         "cu pro veniam essent antiopam. " +
@@ -141,8 +141,8 @@ function create(options, data, times, index) {
             cmdCore.handleError(err);
 
             log.log("info", "New Annotation Object ID is: " + id, { id: id });
-//          if(times == index+1)
-//            process.exit(0);
+            if (times == index+1)
+                process.exit(0);
         });
     });
 }

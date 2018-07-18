@@ -48,12 +48,11 @@ describe("TimelineObject Tests", function() {
             };
             var expect = 1;  
             var objectsAPI = nock("http://localhost:8080")
-          .post("/concerto/mpulse/api/timeline/v1")
-          .reply(200,  function(uri, requestBodyObject) {
-              var requestBody = JSON.parse(requestBodyObject);
-              assert.deepEqual(properties, requestBody);
-              return { id: expect };
-          });
+                .post("/concerto/mpulse/api/timeline/v1")
+                .reply(200,  function(uri, requestBodyObject) {
+                    assert.deepEqual(properties, requestBodyObject);
+                    return { id: expect };
+                });
 
             var objects = new TimelineObject(constants.TIMELINE_URL);
             objects.createTimelineObject(1, properties, function(error, result) {
@@ -86,12 +85,12 @@ describe("TimelineObject Tests", function() {
             };
             var expect = { message: "Error", code: 500 };
             var objectsAPI = nock("http://localhost:8080")
-                    .post("/concerto/mpulse/api/timeline/v1")
-                    .replyWithError(expect, function(uri, requestBody) {
-                        var requestBodyObject = JSON.parse(requestBody);
-                        assert.deepEqual(properties, requestBodyObject);
-                        return expect;
-                    });
+                .post("/concerto/mpulse/api/timeline/v1")
+                .replyWithError(expect, function(uri, requestBody) {
+                    var requestBodyObject = JSON.parse(requestBody);
+                    assert.deepEqual(properties, requestBodyObject);
+                    return expect;
+                });
 
             var TimelineObject = require(REQUIRE_CLASS);
             var constants = require(REQUIRE_CONSTANTS);
@@ -129,11 +128,11 @@ describe("TimelineObject Tests", function() {
             var id = 1;
      
             var objectsAPI = nock("http://localhost:8080")
-              .get("/concerto/mpulse/api/timeline/v1/" + id)
-              .reply(200, function(uri, requestBody) {
-                  assert.strictEqual(this.req.headers["x-auth-token"], 1);
-                  return expect;
-              });
+                .get("/concerto/mpulse/api/timeline/v1/" + id)
+                .reply(200, function(uri, requestBody) {
+                    assert.strictEqual(this.req.headers["x-auth-token"], 1);
+                    return expect;
+                });
 
             var objects = new TimelineObject(constants.TIMELINE_URL);
             objects.getTimelineObjectByID(1, 1, function(error, result) {
@@ -201,11 +200,11 @@ describe("TimelineObject Tests", function() {
             var query = { start: 1531242000000 };
             var error = { code: 500, message: "Failed" };
             var objectsAPI = nock("http://localhost:8080")
-              .get("/concerto/mpulse/api/timeline/v1?start=1531242000000")
-              .replyWithError(error, function() {
-                  assert.strictEqual(this.req.headers["x-auth-token"], 1);
-                  return expect;
-              });
+                .get("/concerto/mpulse/api/timeline/v1?start=1531242000000")
+                .replyWithError(error, function() {
+                    assert.strictEqual(this.req.headers["x-auth-token"], 1);
+                    return expect;
+                });
 
             var timelineobjects = new TimelineObject(constants.TIMELINE_URL);
             timelineobjects.getTimelineObjectsList(1, query, function(err, result) {
@@ -240,12 +239,12 @@ describe("TimelineObject Tests", function() {
             };
 
             var objectsAPI = nock("http://localhost:8080")
-              .put("/concerto/mpulse/api/timeline/v1/" + id)
-              .reply(200, function() {
-                  assert.strictEqual(this.req.headers["x-auth-token"], token);
-                  data.start = update.start;
-                  return data;
-              });
+                .put("/concerto/mpulse/api/timeline/v1/" + id)
+                .reply(200, function() {
+                    assert.strictEqual(this.req.headers["x-auth-token"], token);
+                    data.start = update.start;
+                    return data;
+                });
 
             var timelineobject = new TimelineObject(constants.TIMELINE_URL);
             timelineobject.updateTimelineObject(token, id, update, function(err, result) {

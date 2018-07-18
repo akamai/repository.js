@@ -33,8 +33,7 @@ describe("Objects Tests", function() {
             var objectsAPI = nock("http://mpulse.soasta.com")
                 .put("/concerto/services/rest/RepositoryService/v1/Objects")
                 .reply(200,  function(uri, requestBodyObject) {
-                    var requestBody = JSON.parse(requestBodyObject);
-                    assert.deepEqual(properties, requestBody);
+                    assert.deepEqual(properties, requestBodyObject);
                     return { id: expect };
                 });
 

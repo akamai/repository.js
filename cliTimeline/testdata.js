@@ -236,13 +236,13 @@ function createInsightsContent(title, text) {
         
         timelineItemContent ["content"] = {};
         var timelineContentKeyValues = [type + "UserIncrease",
-          type + "UserPercentage", 
-          type + "UserNumber", 
-          type + "UserAvgRate", 
-          type + "UserAvgNumber"];
+            type + "UserPercentage", 
+            type + "UserNumber", 
+            type + "UserAvgRate", 
+            type + "UserAvgNumber"];
         var timelineContentDataValues = [increaseDrop, dropOrIncreasePercentage + "%",
-          dropOrIncreaseNumber + "k visitors","Avg for last " + dropOrIncreaseAvgRate + " days",
-          dropOrIncreaseAvgNumber + "k visitors/day"];
+            dropOrIncreaseNumber + "k visitors","Avg for last " + dropOrIncreaseAvgRate + " days",
+            dropOrIncreaseAvgNumber + "k visitors/day"];
         
         for (var i = 0; i < timelineContentDataValues.length; i++) {
             timelineItemContent ["content"][timelineContentKeyValues[i]] = timelineContentDataValues[i];        
@@ -304,7 +304,7 @@ function create(options, data, times, index) {
             cmdCore.handleError(err);
 
             log.log("info", "New Timeline Object ID is: " + id, { id: id });
-            if(times == index+1)
+            if (times == index+1)
                 process.exit(0);
         });
     });

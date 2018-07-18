@@ -67,7 +67,7 @@ program.command("testdata [<params>]")
     .action(require("./testdata.js"));
 
 program.command("update <id> [file]")
-.description("Update timeline object in the repository based on the JSON formatted data in a file")
-.action(require("./update.js"));
+    .description("Update timeline object in the repository based on the JSON formatted data in a file")
+    .action(require("./update.js"));
 
 exports.program = program;
