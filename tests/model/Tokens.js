@@ -62,8 +62,8 @@ describe("Tokens Tests", function() {
                     return expect;
                 });
 
-            var tokens = new Tokens(constants.REPOSITORY_URL);
-            tokens.getToken(id, "script", function(error, result) {
+            var tokens = new Tokens(constants.REPOSITORY_URL, "script");
+            tokens.getToken(id, function(error, result) {
                 assert.isUndefined(error);
                 assert.deepEqual(result, expect);
 
@@ -81,7 +81,7 @@ describe("Tokens Tests", function() {
                 });
 
             var tokens = new Tokens(constants.REPOSITORY_URL);
-            tokens.getToken(id, "script", function(error, result) {
+            tokens.getToken(id, function(error, result) {
                 assert.isUndefined(result);
                 assert.deepEqual(error, expect);
 
