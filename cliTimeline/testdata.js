@@ -254,9 +254,13 @@ function createInsightsContent(title, text) {
         var beacons = (Number((Math.random() * (50 - 1 + 1))) + Number(1)).toFixed(1);
         log.info("loadTime " + loadTime +" complementaryLoadTime " + complementaryLoadTime + " beacons " + beacons);
         timelineItemContent ["content"] = {
-            "beacons": beacons +"m", 
-            "threeSecLoadTime": loadTime + "%",
-            "fourSecLoadTime": complementaryLoadTime + "%"
+            "beaconNumber": beacons +"m",
+            "beaconLabel":"Beacons",
+            "upperRightLoadTime": loadTime + "%",
+            "upperRightLoadTimeLabel": "0-3 sec Load time",
+            "upperRightLoadTimePerformance": "+ 4% vs last week",
+            "lowerRightLoadTime": complementaryLoadTime + "%",
+            "lowerRightLoadTimeLabel": "4+ sec Load time"
         };
     }      
     return  timelineItemContent;
