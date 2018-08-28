@@ -74,8 +74,8 @@ function generateRandomData(testParams) {
         "Vix magna accumsan te, in stet eligendi pri.s"];
    
     annotationObject ["type"] = typeArray[Math.floor(Math.random() * typeArray.length)];
-    annotationObject ["title"] = titleArray[Math.floor(Math.random() * titleArray.length)];;
-    annotationObject ["text"] = textArray[Math.floor(Math.random() * textArray.length)];;
+    annotationObject ["title"] = titleArray[Math.floor(Math.random() * titleArray.length)];
+    annotationObject ["text"] = textArray[Math.floor(Math.random() * textArray.length)];
     annotationObject ["start"] = "";
     annotationObject ["end"] = "";
     annotationObject ["domainIds"] = 1;
@@ -86,7 +86,8 @@ function generateRandomData(testParams) {
         switch (item[0]) {
         case "start": annotationObject ["start"] = item[1]; break;
         case "end": annotationObject ["end"] = item[1]; break;
-        case "domainIds": annotationObject ["domainIds"] = item[1];  break; 
+        case "domainIds": annotationObject ["domainIds"] = item[1]; break; 
+        case "type": annotationObject["type"] = item[1]; break;
         } 
     }
     
