@@ -74,14 +74,14 @@ function generateRandomData(testParams) {
         "Qui an sumo mucius elaboraret. In tempor volumus duo, unum reque omittam duo ut. " +
         "Vix magna accumsan te, in stet eligendi pri.s"];
 
-    timelineItemContent ["title"] = titleArray[Math.floor(Math.random() * titleArray.length)];;
-    timelineItemContent ["text"] = textArray[Math.floor(Math.random() * textArray.length)];;
+    timelineItemContent ["title"] = titleArray[Math.floor(Math.random() * titleArray.length)];
+    timelineItemContent ["text"] = textArray[Math.floor(Math.random() * textArray.length)];
     timelineObject ["TimelineItemType"] = typeArray[Math.floor(Math.random() * typeArray.length)];
     timelineObject ["start"] = "";
     timelineObject ["end"] = "";
     // mPulseDemo id=1 (default) 
     timelineObject ["appIds"] = 1; 
-    timelineItemContent ["category"] = categoryArray[Math.floor(Math.random() * categoryArray.length)];;
+    timelineItemContent ["category"] = categoryArray[Math.floor(Math.random() * categoryArray.length)];
         
     // set up the cmd line data
     for (var data = 0; data < testParams.length; data++) {
@@ -90,6 +90,7 @@ function generateRandomData(testParams) {
         case "start": timelineObject ["start"] = item[1]; break;
         case "end": timelineObject ["end"] = item[1]; break;
         case "appIds": timelineObject ["appIds"] = item[1]; break;
+        case "type": timelineObject ["TimelineItemType"] = item[1]; break;
         }
     }
 
