@@ -74,14 +74,14 @@ function generateRandomData(testParams) {
         "Qui an sumo mucius elaboraret. In tempor volumus duo, unum reque omittam duo ut. " +
         "Vix magna accumsan te, in stet eligendi pri.s"];
 
-    timelineItemContent ["title"] = titleArray[Math.floor(Math.random() * titleArray.length)];;
-    timelineItemContent ["text"] = textArray[Math.floor(Math.random() * textArray.length)];;
+    timelineItemContent ["title"] = titleArray[Math.floor(Math.random() * titleArray.length)];
+    timelineItemContent ["text"] = textArray[Math.floor(Math.random() * textArray.length)];
     timelineObject ["TimelineItemType"] = typeArray[Math.floor(Math.random() * typeArray.length)];
     timelineObject ["start"] = "";
     timelineObject ["end"] = "";
     // mPulseDemo id=1 (default) 
     timelineObject ["appIds"] = 1; 
-    timelineItemContent ["category"] = categoryArray[Math.floor(Math.random() * categoryArray.length)];;
+    timelineItemContent ["category"] = categoryArray[Math.floor(Math.random() * categoryArray.length)];
         
     // set up the cmd line data
     for (var data = 0; data < testParams.length; data++) {
@@ -90,6 +90,7 @@ function generateRandomData(testParams) {
         case "start": timelineObject ["start"] = item[1]; break;
         case "end": timelineObject ["end"] = item[1]; break;
         case "appIds": timelineObject ["appIds"] = item[1]; break;
+        case "type": timelineObject ["TimelineItemType"] = item[1]; break;
         }
     }
 
@@ -179,7 +180,9 @@ function createInsightsContent(title, text) {
     timelineItemContent ["text"] = text;
 
     var insightsCategory = ["eventGeoWidget","eventWeeklySummary","eventDesktopUser","eventMobileUser"];
-    var insightsEventWidgetType = ["MASSACHUSATES","CALIFORNIA","USA"];
+    var insightsEventWidgetType = ["CN", "CN_JS", "GB", "DE", "JP", "US", "US_TX", "US_CA", "US_MA", "US_WA"];
+    var insightsEventWidgetCountry = ["CHINA", "JIANGSU", "UNITED KINDOM", "GERMANY", 
+        "JAPAN", "USA", "TEXAS", "CALIFORNIA", "MASSACHUSETTS", "WASHINGTON"];
 
     timelineItemContent ["category"] = insightsCategory[Math.floor(Math.random() * insightsCategory.length)];       
     if (timelineItemContent ["category"] == "eventGeoWidget") {
@@ -187,8 +190,9 @@ function createInsightsContent(title, text) {
         var region = {};
         var regionType = insightsEventWidgetType[Math.floor(Math.random() * 
                          insightsEventWidgetType.length)];             
-        timelineItemContent ["title"] = "POPULAR IN " + regionType;
-        var filePath = path.resolve("cliTimeline/" + regionType + ".json");
+        timelineItemContent ["title"] = "POPULAR IN " + 
+                                        insightsEventWidgetCountry[(insightsEventWidgetType.indexOf(regionType))];
+        var filePath = path.resolve("cliTimeline/regionJson/" + regionType + ".json");
         fs.stat(filePath, function(err, stat) {
             cmdCore.handleError(err);
          
@@ -198,8 +202,8 @@ function createInsightsContent(title, text) {
                 }
            
                 var randomBeaconCount = Number(Math.floor(Math.random() * (50 - 1 + 1))) + Number(50);
-                var randomMedLoadTime = (Number((Math.random() * (4567 - 1234 + 1))) + 
-                                                   Number(4567)).toFixed(4);
+                var randomMedLoadTime = (Number((Math.random() * (5000 - 10 + 1))) + Number(10)).toFixed(4);
+                
                 region ["beaconCount"] = randomBeaconCount;
                 region ["medLoadTime"] = randomMedLoadTime;
                 
@@ -209,10 +213,11 @@ function createInsightsContent(title, text) {
                 beaconData += line;
           
             });  
+            var countryRegionCode = regionType.split("_");
             timelineItemContent ["content"] = {
                 "location": {
-                    "countryCode": "US", 
-                    "regionCode": regionType.indexOf("USA") > -1 ? null : regionType.substring(0, 2)
+                    "countryCode": countryRegionCode[0], 
+                    "regionCode": countryRegionCode[1]
                 },
                 "beaconData": JSON.parse(beaconData)
             };
@@ -254,9 +259,13 @@ function createInsightsContent(title, text) {
         var beacons = (Number((Math.random() * (50 - 1 + 1))) + Number(1)).toFixed(1);
         log.info("loadTime " + loadTime +" complementaryLoadTime " + complementaryLoadTime + " beacons " + beacons);
         timelineItemContent ["content"] = {
-            "beacons": beacons +"m", 
-            "threeSecLoadTime": loadTime + "%",
-            "fourSecLoadTime": complementaryLoadTime + "%"
+            "beaconNumber": beacons +"m",
+            "beaconLabel":"Beacons",
+            "upperRightLoadTime": loadTime + "%",
+            "upperRightLoadTimeLabel": "0-3 sec Load time",
+            "upperRightLoadTimePerformance": "+ 4% vs last week",
+            "lowerRightLoadTime": complementaryLoadTime + "%",
+            "lowerRightLoadTimeLabel": "4+ sec Load time"
         };
     }      
     return  timelineItemContent;
