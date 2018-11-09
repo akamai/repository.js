@@ -42,8 +42,9 @@ if (process.argv.indexOf("testdata-gen") > -1) {
     console.log("   appIds         appIds=   <app ids>                 App ids");
     console.log("   start          start=    <11234564512121>          Event start time in miliseconds");
     console.log("   end            end=      <11234564512121>          Event end time in milisecond");
-    console.log("   type           type=     <'Insights' or 'Badge'>          The type of timeline object you want to be created");
-    console.log(" \n");  
+    console.log("   type           type=     <'Insights' or 'Badge'>          " +
+        "The type of timeline object you want to be created");
+    console.log(" \n");
 }
 
 // commands

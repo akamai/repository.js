@@ -13,6 +13,7 @@ var log = require("../lib/util/log");
 var cmdCore = require("./core");
 var fs = require("fs");
 var path = require("path");
+
 //
 // Action
 //
@@ -30,7 +31,6 @@ module.exports = function(params, options) {
     }
     cmdCore.init(options);
     createTimelineJSON(testParams, options);
-
 };
 
 function createTimelineJSON(testParams, options) {
@@ -39,19 +39,24 @@ function createTimelineJSON(testParams, options) {
     testParams = testParams.split(",");
     var timelineObject = {};
     var count = 1;
+
     for (var data = 0; data < testParams.length; data++) {
         var item = testParams[data].split("=");
+
         if (item[0] == "count")
             count = item[1];
     }
 
+    // generate UID's
+    var UIDs = generateRandomUIDs(count);
+
     for (var index = 0; index < count; index++) {
-        timelineObject = generateRandomData(testParams);
+        timelineObject = generateRandomData(UIDs[index], testParams);
         create(options,timelineObject, count, index);
     }
 }
 
-function generateRandomData(testParams) {
+function generateRandomData(UID, testParams) {
     var timelineItemContent = {};
     var timelineItem = {};
     var timelineObject = {};
@@ -79,10 +84,11 @@ function generateRandomData(testParams) {
     timelineObject ["TimelineItemType"] = typeArray[Math.floor(Math.random() * typeArray.length)];
     timelineObject ["start"] = "";
     timelineObject ["end"] = "";
-    // mPulseDemo id=1 (default) 
-    timelineObject ["appIds"] = 1; 
+    timelineObject ["uid"] = UID;
+    // mPulseDemo id=1 (default)
+    timelineObject ["appIds"] = 1;
     timelineItemContent ["category"] = categoryArray[Math.floor(Math.random() * categoryArray.length)];
-        
+
     // set up the cmd line data
     for (var data = 0; data < testParams.length; data++) {
         var item = testParams[data].split("=");
@@ -95,8 +101,7 @@ function generateRandomData(testParams) {
     }
 
     // generate dates between start and end
-    var dates;
-    dates = getRandomStartEndDates((Number)(timelineObject ["start"]),(Number)(timelineObject ["end"]));
+    var dates = getRandomStartEndDates((Number)(timelineObject ["start"]),(Number)(timelineObject ["end"]));
     timelineObject ["start"] = dates[0];
     timelineObject ["end"] = dates[1];
 
@@ -107,15 +112,15 @@ function generateRandomData(testParams) {
         timelineItemContent ["content"] = {};
         break;
     case "Badge":
-        timelineItemContent = createBadgesContent(timelineItemContent ["title"], 
+        timelineItemContent = createBadgesContent(timelineItemContent ["title"],
             timelineItemContent ["category"], timelineObject ["start"]);
         break;
     case "Insights":
-        timelineItemContent = createInsightsContent(timelineItemContent ["title"], 
+        timelineItemContent = createInsightsContent(timelineItemContent ["title"],
             timelineItemContent ["category"], timelineItemContent ["text"]);
         break;
     }
-    
+
     timelineObject ["timelineItem"] = { timelineItemContent };
     return timelineObject;
 }
@@ -150,25 +155,26 @@ function createBadgesContent(title, category, start) {
         "eum commune definitiones at"];
 
     var twoColumnsLayout = [true,false];
-    
+
     var textCol3BadgeArray = [
         "No meliore",
         "ad euismod",
         "Id vim"];
-          
+
     var timelineItemContent = {};
     timelineItemContent ["title"] = title;
     timelineItemContent ["text"] = new Date(start).toString();
     timelineItemContent ["category"] = category;
     timelineItemContent ["content"] = {};
- 
+
     timelineItemContent ["content"] = {
         "iconID": iconIDBadgeArray[Math.floor(Math.random() * iconIDBadgeArray.length)],
         "background"   : backgroundBadgeArray[Math.floor(Math.random() * backgroundBadgeArray.length)],
         "textCol2Row1" : textCol2Row1BadgeArray[Math.floor(Math.random() * textCol2Row1BadgeArray.length)],
         "textCol2Row2" : (new Date(new Date().getTime())).toString(),
         "twoColumnsLayout" : twoColumnsLayout[Math.floor(Math.random() * twoColumnsLayout.length)],
-        "textCol3": textCol3BadgeArray[Math.floor(Math.random() * textCol3BadgeArray.length)]  
+        "textCol3": textCol3BadgeArray[Math.floor(Math.random() * textCol3BadgeArray.length)],
+        "url": ""
     };
 
     return timelineItemContent;
@@ -181,78 +187,78 @@ function createInsightsContent(title, text) {
 
     var insightsCategory = ["eventGeoWidget","eventWeeklySummary","eventDesktopUser","eventMobileUser"];
     var insightsEventWidgetType = ["CN", "CN_JS", "GB", "DE", "JP", "US", "US_TX", "US_CA", "US_MA", "US_WA"];
-    var insightsEventWidgetCountry = ["CHINA", "JIANGSU", "UNITED KINDOM", "GERMANY", 
+    var insightsEventWidgetCountry = ["CHINA", "JIANGSU", "UNITED KINDOM", "GERMANY",
         "JAPAN", "USA", "TEXAS", "CALIFORNIA", "MASSACHUSETTS", "WASHINGTON"];
 
-    timelineItemContent ["category"] = insightsCategory[Math.floor(Math.random() * insightsCategory.length)];       
+    timelineItemContent ["category"] = insightsCategory[Math.floor(Math.random() * insightsCategory.length)];
     if (timelineItemContent ["category"] == "eventGeoWidget") {
         var beaconData = "";
         var region = {};
-        var regionType = insightsEventWidgetType[Math.floor(Math.random() * 
-                         insightsEventWidgetType.length)];             
-        timelineItemContent ["title"] = "POPULAR IN " + 
+        var regionType = insightsEventWidgetType[Math.floor(Math.random() *
+                         insightsEventWidgetType.length)];
+        timelineItemContent ["title"] = "POPULAR IN " +
                                         insightsEventWidgetCountry[(insightsEventWidgetType.indexOf(regionType))];
         var filePath = path.resolve("cliTimeline/regionJson/" + regionType + ".json");
         fs.stat(filePath, function(err, stat) {
             cmdCore.handleError(err);
-         
+
             fs.readFileSync(filePath, "utf8").toString().split("\n").forEach(function(line, index, arr) {
-                if (index === arr.length - 1 && line === "") { 
+                if (index === arr.length - 1 && line === "") {
                     log.info("finished");
                 }
-           
+
                 var randomBeaconCount = Number(Math.floor(Math.random() * (50 - 1 + 1))) + Number(50);
                 var randomMedLoadTime = (Number((Math.random() * (5000 - 10 + 1))) + Number(10)).toFixed(4);
-                
+
                 region ["beaconCount"] = randomBeaconCount;
                 region ["medLoadTime"] = randomMedLoadTime;
-                
-                var jsonRegion = JSON.stringify(region).replace("{",""); 
-       
-                line = line.replace("}", "," + jsonRegion);         
+
+                var jsonRegion = JSON.stringify(region).replace("{","");
+
+                line = line.replace("}", "," + jsonRegion);
                 beaconData += line;
-          
-            });  
+
+            });
             var countryRegionCode = regionType.split("_");
             timelineItemContent ["content"] = {
                 "location": {
-                    "countryCode": countryRegionCode[0], 
+                    "countryCode": countryRegionCode[0],
                     "regionCode": countryRegionCode[1]
                 },
                 "beaconData": JSON.parse(beaconData)
             };
         });
-    } else if (timelineItemContent ["category"] == "eventDesktopUser" || 
+    } else if (timelineItemContent ["category"] == "eventDesktopUser" ||
         timelineItemContent ["category"] == "eventMobileUser") {
         var increaseDropArray = [true,false];
-        var increaseDrop = increaseDropArray[Math.floor(Math.random() * increaseDropArray.length)];  
+        var increaseDrop = increaseDropArray[Math.floor(Math.random() * increaseDropArray.length)];
         var dropOrIncreasePercentage = Number(Math.floor(Math.random() * (100 - 1 + 1))) + Number(1);
         var dropOrIncreaseNumber = (Number((Math.random() * (50 - 1 + 1))) + Number(1)).toFixed(1);
         var dropOrIncreaseAvgRate = Math.floor(Math.random() * Math.floor(60));
         var dropOrIncreaseAvgNumber = (Number((Math.random() * (50 - 1 + 1))) + Number(1)).toFixed(1);
         var widgetType = ["Drop","Increase"];
-        var dropOrIncreaseWidget = widgetType[Math.floor(Math.random() * widgetType.length)];  
+        var dropOrIncreaseWidget = widgetType[Math.floor(Math.random() * widgetType.length)];
         var type;
         timelineItemContent ["category"].indexOf("Desktop") > -1 ? type = "desktop" : type = "mobile";
-        log.info("increaseDrop " + increaseDrop + "dropOrIncreasePercentage " 
-            + dropOrIncreasePercentage +" dropOrIncreaseNumber " 
+        log.info("increaseDrop " + increaseDrop + "dropOrIncreasePercentage "
+            + dropOrIncreasePercentage +" dropOrIncreaseNumber "
             + dropOrIncreaseNumber + " dropOrIncreaseAvgRate " + dropOrIncreaseAvgRate
             + " dropOrIncreaseAvgNumber " + dropOrIncreaseAvgNumber);
-        
+
         timelineItemContent ["content"] = {};
         var timelineContentKeyValues = [type + "UserIncrease",
-            type + "UserPercentage", 
-            type + "UserNumber", 
-            type + "UserAvgRate", 
+            type + "UserPercentage",
+            type + "UserNumber",
+            type + "UserAvgRate",
             type + "UserAvgNumber"];
         var timelineContentDataValues = [increaseDrop, dropOrIncreasePercentage + "%",
             dropOrIncreaseNumber + "k visitors","Avg for last " + dropOrIncreaseAvgRate + " days",
             dropOrIncreaseAvgNumber + "k visitors/day"];
-        
+
         for (var i = 0; i < timelineContentDataValues.length; i++) {
-            timelineItemContent ["content"][timelineContentKeyValues[i]] = timelineContentDataValues[i];        
+            timelineItemContent ["content"][timelineContentKeyValues[i]] = timelineContentDataValues[i];
         }
-        // eventWeeklySummary    
+        // eventWeeklySummary
     } else {
         var loadTime = Number(Math.floor(Math.random() * (100 - 1 + 1))) + Number(1);
         var complementaryLoadTime = 100 - loadTime;
@@ -267,7 +273,7 @@ function createInsightsContent(title, text) {
             "lowerRightLoadTime": complementaryLoadTime + "%",
             "lowerRightLoadTimeLabel": "4+ sec Load time"
         };
-    }      
+    }
     return  timelineItemContent;
 }
 
@@ -286,25 +292,38 @@ function getRandomStartEndDates(start, end) {
         var today = new Date();
         end = today.getTime();
         start = end - tenDaysMs;
-        dates = generateRandomDates (start, end);   
+        dates = generateRandomDates (start, end);
     }
     return dates;
 }
-  
-function generateRandomDates(start,end) {  
+
+function generateRandomDates(start,end) {
     var dates = [];
     var date1 = Number(Math.floor(Math.random() * (end - start + 1))) + Number(start);
     var date2 = Number(Math.floor(Math.random() * (end - start + 1))) + Number(start);
     if (date1 < date2) {
-        dates.push(date1); 
-        dates.push(date2); 
+        dates.push(date1);
+        dates.push(date2);
     } else {
-        dates.push(date2); 
-        dates.push(date1); 
+        dates.push(date2);
+        dates.push(date1);
     }
     return dates;
 }
-    
+
+function generateRandomUIDs(numOfElements) {
+    var UIDs = [];
+
+    while (UIDs.length < numOfElements) {
+        var UID = Math.floor(Math.random() * 99999).toString();
+
+        if (UIDs.indexOf(UID) === -1)
+            UIDs.push(UID);
+    }
+
+    return UIDs;
+}
+
 function create(options, data, times, index) {
     cmdCore.connectToRepository(options, function(err, timeline) {
         cmdCore.handleError(err);
