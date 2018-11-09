@@ -42,8 +42,9 @@ if (process.argv.indexOf("testdata-gen") > -1) {
     console.log("   domainIds      domainId=  <domain ids>              Domain id");
     console.log("   start          start=     <11234564512121>          Annonation start time in miliseconds");
     console.log("   end            end=       <11234564512121>          Annotation end time in milisecond");
-    console.log("   type           type=      <'USER_ENTERED', 'MP_ALERT', or 'DIMENSION_EXPLOSION'>          The type of annotation object you want to be created");
-    console.log(" \n");  
+    console.log("   type           type=      <'USER_ENTERED', 'MP_ALERT', or 'DIMENSION_EXPLOSION'>" +
+        "          The type of annotation object you want to be created");
+    console.log(" \n");
 }
 
 // commands

@@ -93,10 +93,10 @@ function generateRandomData(UID, testParams) {
     for (var data = 0; data < testParams.length; data++) {
         var item = testParams[data].split("=");
         switch (item[0]) {
-            case "start": timelineObject ["start"] = item[1]; break;
-            case "end": timelineObject ["end"] = item[1]; break;
-            case "appIds": timelineObject ["appIds"] = item[1]; break;
-            case "type": timelineObject ["TimelineItemType"] = item[1]; break;
+        case "start": timelineObject ["start"] = item[1]; break;
+        case "end": timelineObject ["end"] = item[1]; break;
+        case "appIds": timelineObject ["appIds"] = item[1]; break;
+        case "type": timelineObject ["TimelineItemType"] = item[1]; break;
         }
     }
 
@@ -107,18 +107,18 @@ function generateRandomData(UID, testParams) {
 
     // generate content by type
     switch (timelineObject ["TimelineItemType"]) {
-        case "Pin":
-            timelineItemContent ["category"] = "";
-            timelineItemContent ["content"] = {};
-            break;
-        case "Badge":
-            timelineItemContent = createBadgesContent(timelineItemContent ["title"],
-                timelineItemContent ["category"], timelineObject ["start"]);
-            break;
-        case "Insights":
-            timelineItemContent = createInsightsContent(timelineItemContent ["title"],
-                timelineItemContent ["category"], timelineItemContent ["text"]);
-            break;
+    case "Pin":
+        timelineItemContent ["category"] = "";
+        timelineItemContent ["content"] = {};
+        break;
+    case "Badge":
+        timelineItemContent = createBadgesContent(timelineItemContent ["title"],
+            timelineItemContent ["category"], timelineObject ["start"]);
+        break;
+    case "Insights":
+        timelineItemContent = createInsightsContent(timelineItemContent ["title"],
+            timelineItemContent ["category"], timelineItemContent ["text"]);
+        break;
     }
 
     timelineObject ["timelineItem"] = { timelineItemContent };
@@ -314,11 +314,10 @@ function generateRandomDates(start,end) {
 function generateRandomUIDs(numOfElements) {
     var UIDs = [];
 
-    while(UIDs.length < numOfElements)
-    {
+    while (UIDs.length < numOfElements) {
         var UID = Math.floor(Math.random() * 99999).toString();
 
-        if(UIDs.indexOf(UID) === -1)
+        if (UIDs.indexOf(UID) === -1)
             UIDs.push(UID);
     }
 
