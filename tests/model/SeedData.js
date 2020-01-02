@@ -21,7 +21,7 @@ describe("SeedData Tests", function() {
     });
 
     it("Should create an instance of SOASTA.Repository", function() {
-        var expect = "http://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/SeedData";
+        var expect = "https://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/SeedData";
         var seedData = new SeedData(constants.REPOSITORY_URL);
 
         assert.instanceOf(seedData, SeedData);
@@ -36,7 +36,7 @@ describe("SeedData Tests", function() {
             var objectsUrlAppend = "/SeedData";
             var id = 1;
 
-            var seedDataAPI = nock("http://mpulse.soasta.com")
+            var seedDataAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + id)
                 .reply(200,  function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], token);
@@ -55,7 +55,7 @@ describe("SeedData Tests", function() {
             var objectsUrlAppend = "/SeedData";
             var id = 1;
             var error = { code: 400, message: "failed" };
-            var seedDataAPI = nock("http://mpulse.soasta.com")
+            var seedDataAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + id)
                 .replyWithError(error);
 
@@ -73,7 +73,7 @@ describe("SeedData Tests", function() {
             var token = 1;
             var objectsUrlAppend = "/SeedData";
             var id = 1;
-            var seedDataAPI = nock("http://mpulse.soasta.com")
+            var seedDataAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/SeedData/" + id)
                 .reply(200, function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], token);

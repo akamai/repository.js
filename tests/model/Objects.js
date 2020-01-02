@@ -17,7 +17,7 @@ describe("Objects Tests", function() {
     });
 
     it("Should create an instance of SOASTA.Repository", function() {
-        var expect = "http://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/Objects";
+        var expect = "https://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/Objects";
         var objects = new Objects(constants.REPOSITORY_URL);
 
         assert.instanceOf(objects, Objects);
@@ -30,7 +30,7 @@ describe("Objects Tests", function() {
             var expect = 1;
             var objectsUrlAppend = "/Objects";
 
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .put("/concerto/services/rest/RepositoryService/v1/Objects")
                 .reply(200,  function(uri, requestBodyObject) {
                     assert.deepEqual(properties, requestBodyObject);
@@ -50,7 +50,7 @@ describe("Objects Tests", function() {
             var objectsUrlAppend = "/Objects";
             var properties = { a: 1, b:2 , c:3 };
             var expect = { message: "Error", code: 500 };
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .put("/concerto/services/rest/RepositoryService/v1/Objects")
                 .replyWithError(expect, function(uri, requestBodyObject) {
                     assert.deepEqual(properties, requestBodyObject);
@@ -74,7 +74,7 @@ describe("Objects Tests", function() {
             var id = 1;
             var type = "domain";
 
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
                 .reply(200, function(uri, requestBody) {
                     assert.strictEqual(this.req.headers["x-auth-token"], 1);
@@ -95,7 +95,7 @@ describe("Objects Tests", function() {
             var id = 1;
             var type = "domain";
             var expect = { message: "Error", code: 500 };
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
                 .replyWithError(expect, function(uri, requestBody) {
                     assert.strictEqual(this.req.headers["x-auth-token"], 1);
@@ -115,7 +115,7 @@ describe("Objects Tests", function() {
             var objectsUrlAppend = "/Objects";
             var type = "domain";
             var query = { a: 1, c: 3 };
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/?a=1&c=3")
                 .reply(200, function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], 1);
@@ -135,7 +135,7 @@ describe("Objects Tests", function() {
             var type = "domain";
             var query = { a: 1, c: 3 };
             var error = { code: 500, message: "Failed" };
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/?a=1&c=3")
                 .replyWithError(error, function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], 1);
@@ -169,7 +169,7 @@ describe("Objects Tests", function() {
                 }]
             };
 
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .post("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
                 .reply(200, function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], token);
@@ -204,7 +204,7 @@ describe("Objects Tests", function() {
                     id: 0
                 }]
             };
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .post("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
                 .replyWithError(error, function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], token);
@@ -223,7 +223,7 @@ describe("Objects Tests", function() {
             var type = "domain";
             var id = 1;
             var token = 1;
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .delete("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
                 .reply(200, function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], token);
@@ -245,7 +245,7 @@ describe("Objects Tests", function() {
             var expect = "";
             var error = { code: 400, message: "Failed!" };
 
-            var objectsAPI = nock("http://mpulse.soasta.com")
+            var objectsAPI = nock("https://mpulse.soasta.com")
                 .delete("/concerto/services/rest/RepositoryService/v1/Objects/" + type + "/" + id)
                 .replyWithError(error, function() {
                     assert.strictEqual(this.req.headers["x-auth-token"], token);

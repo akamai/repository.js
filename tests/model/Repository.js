@@ -30,7 +30,7 @@ describe("Repository Tests", function() {
             password = "doesnotexist",
             expect = { code: 401, message: "Unauthorized" };
 
-        var repositoryAPI = nock("http://mpulse.soasta.com")
+        var repositoryAPI = nock("https://mpulse.soasta.com")
             .put("/concerto/services/rest/RepositoryService/v1/Tokens")
             .replyWithError(expect);
 
@@ -49,7 +49,7 @@ describe("Repository Tests", function() {
             username = "soasta",
             password = "password";
 
-        var repositoryAPI = nock("http://mpulse.soasta.com")
+        var repositoryAPI = nock("https://mpulse.soasta.com")
             .put("/concerto/services/rest/RepositoryService/v1/Tokens")
             .reply(200,  function(uri, requestBodyObject) {
                 assert.strictEqual(requestBodyObject.userName, username);
@@ -72,7 +72,7 @@ describe("Repository Tests", function() {
             username = "soasta",
             password = "password";
 
-        var repositoryAPI = nock("http://mpulse.soasta.com")
+        var repositoryAPI = nock("https://mpulse.soasta.com")
             .put("/concerto/services/rest/RepositoryService/v1/Tokens")
             .reply(200,  function(uri, requestBodyObject) {
                 assert.strictEqual(requestBodyObject.userName, username);
@@ -97,7 +97,7 @@ describe("Repository Tests", function() {
             password = "doesnotexist",
             expect = { code: 401, message: "Unauthorized" };
 
-        var repositoryAPI = nock("http://mpulse.soasta.com")
+        var repositoryAPI = nock("https://mpulse.soasta.com")
             .put("/concerto/services/rest/RepositoryService/v1/Tokens")
             .replyWithError(expect);
 
