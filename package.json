@@ -1,6 +1,6 @@
 {
   "name": "soasta-repository",
-  "version": "2.1.11",
+  "version": "2.1.12",
   "description": "SOASTA JavaScript repository access",
   "main": "index.js",
   "bin": {
@@ -20,7 +20,7 @@
   "homepage": "https://github.com/SOASTA/repository.js#readme",
   "dependencies": {
     "commander": "^2.8.1",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.15",
     "winston": "^1.0.1"
   },
   "devDependencies": {
