@@ -17,7 +17,7 @@ describe("Tokens Tests", function() {
     });
 
     it("Should create an instance of SOASTA.Repository", function() {
-        var expect = "http://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/Tokens";
+        var expect = "https://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1/Tokens";
         var tokens = new Tokens(constants.REPOSITORY_URL);
 
         assert.instanceOf(tokens, Tokens);
@@ -31,7 +31,7 @@ describe("Tokens Tests", function() {
                 username = "soasta",
                 password = "password";
 
-            var repositoryAPI = nock("http://mpulse.soasta.com")
+            var repositoryAPI = nock("https://mpulse.soasta.com")
                 .put("/concerto/services/rest/RepositoryService/v1/Tokens")
                 .reply(200,  function(uri, requestBodyObject) {
                     assert.strictEqual(requestBodyObject.userName, username);
@@ -55,7 +55,7 @@ describe("Tokens Tests", function() {
             var expect = { a: 1, b:2, c:3 };
             var id = "sdadas-fsd-sdf-sdfg";
 
-            var tokensAPI = nock("http://mpulse.soasta.com")
+            var tokensAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Tokens/" + id)
                 .reply(200, function(uri, requestBody) {
                     assert.strictEqual(this.req.headers["x-source"], "script");
@@ -74,7 +74,7 @@ describe("Tokens Tests", function() {
         it("Should try to get a Token but fail", function(done) {
             var id = "sdadas-fsd-sdf-sdfg";
             var expect = { message: "Error", code: 500 };
-            var tokensAPI = nock("http://mpulse.soasta.com")
+            var tokensAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Tokens/" + id)
                 .replyWithError(expect, function(uri, requestBody) {
                     return requestBody;
@@ -97,7 +97,7 @@ describe("Tokens Tests", function() {
                 username = "soasta",
                 password = "password";
 
-            var repositoryAPI = nock("http://mpulse.soasta.com")
+            var repositoryAPI = nock("https://mpulse.soasta.com")
                 .put("/concerto/services/rest/RepositoryService/v1/Tokens")
                 .reply(200,  function(uri, requestBodyObject) {
                     assert.strictEqual(requestBodyObject.userName, username);

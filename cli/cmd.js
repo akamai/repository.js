@@ -18,7 +18,7 @@ program
     .version(JSON.parse(fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf-8")).version)
     .option("-u, --username <username>", "User name")
     .option("-p, --password <password>", "Password")
-    .option("-T, --apiToken <apitoken>", "SSO API Token")
+    .option("-T, --apiToken <apiToken>", "SSO API Token")
     .option("-t, --tenant <tenant>", "Tenant name")
     .option("-r, --repository <url>", "Repository URL")
     .option("-j, --json", "Output as JSON")
