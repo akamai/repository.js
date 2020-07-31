@@ -1,6 +1,6 @@
 {
   "name": "soasta-repository",
-  "version": "2.1.12",
+  "version": "2.1.13",
   "description": "SOASTA JavaScript repository access",
   "main": "index.js",
   "bin": {
