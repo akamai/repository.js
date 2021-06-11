@@ -3,4 +3,4 @@ var program = require("./cli/cmd.js").program;
 var fs = require("fs");
 
 // go
-program.parse(process.argv);
+program().parse(process.argv);

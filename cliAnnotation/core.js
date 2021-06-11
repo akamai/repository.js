@@ -13,6 +13,7 @@
 //
 var fs = require("fs");
 var _ = require("lodash");
+var winston = require("winston");
 
 var log = require("../lib/util/log");
 var constants = require("../lib/constants");
@@ -31,9 +32,9 @@ exports.init = function(options) {
     var authJsonPath = "auth.json";
 
     if (options && options.parent && typeof options.parent.json === "undefined") {
-        log.transports.console.json =  false;
+        log.format = winston.format.cli();
     } else {
-        log.transports.console.json =  true;
+        log.format = winston.format.json();
     }
 
     if (options && options.parent && options.parent.verbose) {

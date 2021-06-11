@@ -18,8 +18,12 @@ if (typeof window === "undefined") {
     * @desc
     * Exports the [Repository CLI API client]{@link cmd} to access the CLI application
     * to interact from a shell with the Repository
+    *
+    * @example
+    * // Retrieve instance
+    * require('soasta-repository').cmd()
     */
-    exports.cmd = require("./cli/cmd").program;
+    exports.cmdRepository = require("./cli/cmd").program;
 
     /**
     * @export CLI
@@ -27,7 +31,7 @@ if (typeof window === "undefined") {
     * @desc
     * Exports the [CLI utility class]{@link CLI} to initialize the API for CLI use
     */
-    exports.CLI = require("./cli/core");
+    exports.CLIRepository = require("./cli/core");
 
     /**
      * @export cmdAnnotation
@@ -36,7 +40,7 @@ if (typeof window === "undefined") {
      * Exports the [Annotation CLI API client]{@link cmd} to access the CLI application
      * to interact from a shell with the Repository
      */
-    exports.cmd = require("./cliAnnotation/cmd").program;
+    exports.cmdAnnotation = require("./cliAnnotation/cmd").program;
 
     /**
      * @export CLI
@@ -44,7 +48,7 @@ if (typeof window === "undefined") {
      * @desc
      * Exports the [CLI utility class]{@link CLI} to initialize the API for CLI use
      */
-    exports.CLI = require("./cliAnnotation/core");
+    exports.CLIAnnotation = require("./cliAnnotation/core");
 
     /**
      * @export cmdTimeline
@@ -53,7 +57,7 @@ if (typeof window === "undefined") {
      * Exports the [Timeline CLI API client]{@link cmd} to access the CLI application
      * to interact from a shell with the Repository
      */
-    exports.cmd = require("./cliTimeline/cmd").program;
+    exports.cmdTimeline = require("./cliTimeline/cmd").program;
 
     /**
      * @export CLI
@@ -61,6 +65,6 @@ if (typeof window === "undefined") {
      * @desc
      * Exports the [CLI utility class]{@link CLI} to initialize the API for CLI use
      */
-    exports.CLI = require("./cliTimeline/core");
+    exports.CLITimeline = require("./cliTimeline/core");
 
 }
