@@ -135,10 +135,9 @@ Here's the same example as above, using the promise-based version.
 
 ```JavaScript
 var SOASTA = require("soasta-repository").SOASTA;
-var Q = require("Q");
 
 var repo = new SOASTA.Repository("https://mpulse.soasta.com/concerto/services/rest/RepositoryService/v1");
-repo = repo.asPromises(Q);
+repo = repo.asPromises();
 
 repo.connect(null, "my user name", "secret")
 .then(function() {

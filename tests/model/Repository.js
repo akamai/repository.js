@@ -1,8 +1,7 @@
 /* global describe,it*/
 var path = require("path"),
     chai = require("chai"),
-    nock = require("nock"),
-    q = require("q");
+    nock = require("nock");
 
 var REQUIRE_CLASS = path.join(__dirname, "..", "..", "lib", "model", "Repository.js");
 var REQUIRE_CONSTANTS = path.join(__dirname, "..", "..", "lib", "constants.js");
@@ -59,7 +58,7 @@ describe("Repository Tests", function() {
             });
 
         var repository = new Repository(constants.REPOSITORY_URL);
-        repository = repository.asPromises(q);
+        repository = repository.asPromises();
 
         repository.connect(tenantname, username, password).then(function(error) {
             done();
@@ -82,7 +81,7 @@ describe("Repository Tests", function() {
             });
 
         var repository = new Repository(constants.REPOSITORY_URL);
-        var promiseRepo = repository.asPromises(q);
+        var promiseRepo = repository.asPromises();
 
         promiseRepo.connect(tenantname, username, password).then(function(result) {
             assert.strictEqual(promiseRepo.token, token_expected.token);
@@ -102,7 +101,7 @@ describe("Repository Tests", function() {
             .replyWithError(expect);
 
         var repository = new Repository(constants.REPOSITORY_URL);
-        var promiseRepo = repository.asPromises(q);
+        var promiseRepo = repository.asPromises();
 
         promiseRepo.connect(tenantname, username, password)
             .then(function() {
