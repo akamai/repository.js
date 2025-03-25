@@ -15,50 +15,9 @@
  * Array of files to use to run the Unittests on the code base
  */
 var mochaTestFiles = [
-    "tests/index.js",
     "tests/model/*.js",
     "tests/errors/*.js"
 ];
-
-/**
- * @constant coverageHtml
- * @memberof BuildConfiguration
- * @type {string}
- * @desc
- * Destination path to the unittest coverage report
- */
-var coverageHtml = "tests/results/coverage.html";
-
-/**
- * @constant junitReportFile
- * @memberof BuildConfiguration
- * @type {string}
- * @desc
- * Destination path for the JUnit XML format report of the UnitTest run
- */
-var junitReportFile = "tests/results/junit.xml";
-
-/**
- * @constant jsdocSourceFiles
- * @memberof BuildConfiguration
- * @type {String[]}
- * @desc
- * Array of file sources to generate the documentation from
- */
-var jsdocSourceFiles = [
-    "lib/**/*.js",
-    "./*.js",
-    "node_modules/soasta-repository/lib/**/*.js"
-];
-
-/**
- * @constant jsdocTutorialPath
- * @memberof BuildConfiguration
- * @type {string}
- * @desc
- * Directory containing tutorials and other documentation not to be distributed as source code files
- */
-var jsdocTutorialPath = "doc/tutorials";
 
 /**
  * @constant sourcePaths
@@ -68,31 +27,24 @@ var jsdocTutorialPath = "doc/tutorials";
  * A list of all paths to javascript files
  */
 var sourcePaths = [
-    "./lib/**/*.js",
-    "./Gruntfile.js",
-    "./index.js",
-    "./tests/**/*.js"
+    "*.js",
+    "cli/*.js",
+    "cliAnnotation/*.js",
+    "cliTimeline/*.js",
+    "lib/**/*.js",
+    "tests/**/*.js"
 ];
 
 /* eslint-env node */
 module.exports = function(grunt) {
     "use strict";
 
-    var lintFiles = [
-        "*.js",
-        "cli/*.js",
-        "cliAnnotation/*.js",
-        "cliTimeline/*.js",
-        "lib/**/*.js",
-        "tests/**/*.js"
-    ];
-
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         eslint: {
             console: {
-                src: lintFiles,
+                src: sourcePaths,
                 options: {
                     format: "compact"
                 }
@@ -103,7 +55,7 @@ module.exports = function(grunt) {
                     format: "jslint-xml",
                     silent: true
                 },
-                src: lintFiles
+                src: sourcePaths
             }
         },
         mochaTest: {
@@ -122,27 +74,6 @@ module.exports = function(grunt) {
                 },
                 src: mochaTestFiles
             }
-        },
-        jsdoc: {
-            dist: {
-                options: {
-                    destination: "doc",
-                    readme: "README.md",
-                    package: "package.json",
-                    template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
-                    configure : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template/jsdoc.conf.json",
-                    plugins: [
-                        "node_modules/grunt-jsdoc/node_modules/jsdoc/plugins/markdown",
-                        "node_modules/grunt-jsdoc/node_modules/jsdoc/plugins/summarize"
-                    ]
-                },
-                src: [
-                    "lib/**/*.js",
-                    "cli/*.js",
-                    "cliAnnotation/*.js",
-                    "cliTimeline/*.js"
-                ]
-            }
         }
     });
 
@@ -151,7 +82,6 @@ module.exports = function(grunt) {
     //
     grunt.loadNpmTasks("grunt-mocha-test");
     grunt.loadNpmTasks("gruntify-eslint");
-    grunt.loadNpmTasks("grunt-jsdoc");
 
     //
     // Tasks

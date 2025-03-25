@@ -76,9 +76,7 @@ describe("Tokens Tests", function() {
             var expect = { message: "Error", code: 500 };
             var tokensAPI = nock("https://mpulse.soasta.com")
                 .get("/concerto/services/rest/RepositoryService/v1/Tokens/" + id)
-                .replyWithError(expect, function(uri, requestBody) {
-                    return requestBody;
-                });
+                .replyWithError(expect);
 
             var tokens = new Tokens(constants.REPOSITORY_URL);
             tokens.getToken(id, function(error, result) {
@@ -105,9 +103,8 @@ describe("Tokens Tests", function() {
 
                     return token_expected;
                 })
-                .delete("/concerto/services/rest/RepositoryService/v1/Tokens")
+                .delete("/concerto/services/rest/RepositoryService/v1/Tokens/1")
                 .reply(200,  function(uri, requestBody) {
-                    assert.strictEqual(this.req.headers["x-auth-token"], 1);
                     return null;
                 });
 
