@@ -37,7 +37,6 @@ exports.init = function(options) {
         log.format = winston.format.json();
     }
 
-
     if (options && options.parent && options.parent.verbose) {
         log.transports.console.level = "debug";
     }
