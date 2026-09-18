@@ -47,7 +47,7 @@ exports.program = function() {
         console.log(" \n  Optional parameters (comma separated)\n");
         console.log("   count          count=    <number>                  Number timeline objects to be created");
         console.log("   appIds         appIds=   <app ids>                 App ids");
-        console.log("   start          start=    <11234564512121>          Event start time in miliseconds");
+        console.log("   start          start=    <11234564512121>          Event start time in milliseconds");
         console.log("   end            end=      <11234564512121>          Event end time in milisecond");
         console.log("   type           type=     <'Insights' or 'Badge'>          " +
 					"The type of timeline object you want to be created");

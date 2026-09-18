@@ -47,8 +47,8 @@ exports.program = function() {
         console.log(" \n  Optional parameters (comma separated)\n");
         console.log("   count          count=     <number>                  Number timeline objects to be created");
         console.log("   domainIds      domainId=  <domain ids>              Domain id");
-        console.log("   start          start=     <11234564512121>          Annonation start time in miliseconds");
-        console.log("   end            end=       <11234564512121>          Annotation end time in milisecond");
+        console.log("   start          start=     <11234564512121>          Annotation start time in milliseconds");
+        console.log("   end            end=       <11234564512121>          Annotation end time in milliseconds");
         console.log("   type           type=      <'USER_ENTERED', 'MP_ALERT', or 'DIMENSION_EXPLOSION'>" +
 					"          The type of annotation object you want to be created");
         console.log(" \n");
