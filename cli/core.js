@@ -94,7 +94,7 @@ exports.connectToRepository = function(options, callback) {
 }
 
 /**
- * If a none falsy value is passed in use that to log an error to console and exit
+ * If a non-falsy value is passed in use that to log an error to console and exit
  *
  * @param {?Error} err - Error object or null
  */
